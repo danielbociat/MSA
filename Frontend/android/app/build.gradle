@@ -141,7 +141,7 @@ android {
     ndkVersion rootProject.ext.ndkVersion
 
     compileSdkVersion rootProject.ext.compileSdkVersion
-
+    compileSdkVersion = Integer.parseInt('31')
     defaultConfig {
         applicationId "com.frontend"
         minSdkVersion rootProject.ext.minSdkVersion
