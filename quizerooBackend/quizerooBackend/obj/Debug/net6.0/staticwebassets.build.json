@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "Hash": "snovbwSTfDZcvsn4FS8XkTZmBQ4CJfATt/XAQtRSGLc=",
+  "Source": "quizerooBackend",
+  "BasePath": "_content/quizerooBackend",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": []
+}
