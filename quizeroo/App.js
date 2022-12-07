@@ -15,7 +15,7 @@ const App = () =>{
 const styles = StyleSheet.create({
   root:{
     flex:1,
-    height: '100vh',
+
    
   }
 });
