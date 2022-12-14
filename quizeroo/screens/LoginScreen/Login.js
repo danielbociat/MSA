@@ -39,7 +39,7 @@ const Login =() => {
             resizeMode="contain" />
 
             <CustomInput 
-            placeholder= "Username" 
+            placeholder= "Username..." 
             value={username} 
             setValue={setUsername}/>
 
