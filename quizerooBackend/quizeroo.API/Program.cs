@@ -1,4 +1,4 @@
-using Quizeroo.Core.Database;
+using quizeroo.Core.Database;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);

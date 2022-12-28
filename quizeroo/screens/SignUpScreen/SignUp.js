@@ -11,7 +11,14 @@ const SignUp =() => {
     const [passwordRepeat , setPasswordRepeat] = useState('');
 
     const onRegisterPressed = () => {
-        console.warn("Sign in");
+        console.warn(username, email, password);
+
+        fetch("https://localhost:7128/api/" + 'users', {
+            method: 'POST',
+            body: JSON.stringify({username, email, password})
+        }).then(() => { })
+        .catch((e) => console.log(e));
+
     };
     
    
@@ -37,18 +44,17 @@ const SignUp =() => {
             resizeMode="stretch">
         <View style={styles.root}>
         
-        
             <Text style = {styles.title}>Create an account</Text>
 
             <CustomInput 
             placeholder= "Username" 
-            value={email} 
-            setValue={setEmail}/>
+            value={username} 
+            setValue={setUsername}/>
 
             <CustomInput 
             placeholder= "Email" 
-            value={username} 
-            setValue={setUsername}/>
+            value={email} 
+            setValue={setEmail}/>
 
             <CustomInput 
             placeholder = "Password" 

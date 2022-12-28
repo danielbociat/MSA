@@ -1,13 +1,24 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-
+using quizeroo.API.requests;
+using quizeroo.Core.Models;
+using quizeroo.Core.Database;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace quizeroo.API.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/users")]
     [ApiController]
     public class UsersController : ControllerBase
     {
+        private readonly ApplicationDbContext _dbContext;
+        public UsersController(ApplicationDbContext dbContext)
+        {
+            _dbContext = dbContext;
+        }
+
         // GET: api/<UsersController>
         [HttpGet]
         public IEnumerable<string> Get()
@@ -24,8 +35,13 @@ namespace quizeroo.API.Controllers
 
         // POST api/<UsersController>
         [HttpPost]
-        public void Post([FromBody] string value)
+        public async Task<IActionResult> AddJob(AddUserRequest User)
         {
+            var user = new User() { Username = User.Username, Email = User.Email, Password = User.Password };
+            await _dbContext.Users.AddAsync(user);
+            //await _dbContext.SaveChangesAsync();
+
+            return Ok(user);
         }
 
         // PUT api/<UsersController>/5

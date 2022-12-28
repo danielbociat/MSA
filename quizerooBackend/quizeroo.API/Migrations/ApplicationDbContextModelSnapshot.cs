@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using Quizeroo.Core.Database;
+using quizeroo.Core.Database;
 
 #nullable disable
 
@@ -99,6 +99,12 @@ namespace quizeroo.API.Migrations
 
                     b.Property<DateTime>("CreatedTimeUtc")
                         .HasColumnType("datetime2");
+
+                    b.Property<string>("Email")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Password")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime?>("UpdatedTimeUtc")
                         .HasColumnType("datetime2");

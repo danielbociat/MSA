@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Quizeroo.Core.Database
+namespace quizeroo.Core.Database
 {
     public class ApplicationDbContext : DbContext
     {
