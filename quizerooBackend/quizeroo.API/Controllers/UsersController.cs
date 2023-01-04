@@ -21,9 +21,11 @@ namespace quizeroo.API.Controllers
 
         // GET: api/<UsersController>
         [HttpGet]
-        public IEnumerable<string> Get()
+        public async Task<IActionResult> Get()
         {
-            return new string[] { "value1", "value2" };
+            var users = await _dbContext.Users.ToListAsync();
+
+            return Ok(users);
         }
 
         // GET api/<UsersController>/5
@@ -35,7 +37,7 @@ namespace quizeroo.API.Controllers
 
         // POST api/<UsersController>
         [HttpPost]
-        public async Task<IActionResult> AddJob(AddUserRequest User)
+        public async Task<IActionResult> AddUser(AddUserRequest User)
         {
             var user = new User() { Username = User.Username, Email = User.Email, Password = User.Password };
             await _dbContext.Users.AddAsync(user);
