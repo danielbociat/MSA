@@ -1,0 +1,12 @@
+C:\Users\Daniel\Desktop\Quizeroo\quizerooBackend\quizeroo.Core\bin\Release\net6.0\quizeroo.Core.deps.json
+C:\Users\Daniel\Desktop\Quizeroo\quizerooBackend\quizeroo.Core\bin\Release\net6.0\quizeroo.Core.dll
+C:\Users\Daniel\Desktop\Quizeroo\quizerooBackend\quizeroo.Core\bin\Release\net6.0\quizeroo.Core.pdb
+C:\Users\Daniel\Desktop\Quizeroo\quizerooBackend\quizeroo.Core\obj\Release\net6.0\quizeroo.Core.csproj.AssemblyReference.cache
+C:\Users\Daniel\Desktop\Quizeroo\quizerooBackend\quizeroo.Core\obj\Release\net6.0\quizeroo.Core.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Daniel\Desktop\Quizeroo\quizerooBackend\quizeroo.Core\obj\Release\net6.0\quizeroo.Core.AssemblyInfoInputs.cache
+C:\Users\Daniel\Desktop\Quizeroo\quizerooBackend\quizeroo.Core\obj\Release\net6.0\quizeroo.Core.AssemblyInfo.cs
+C:\Users\Daniel\Desktop\Quizeroo\quizerooBackend\quizeroo.Core\obj\Release\net6.0\quizeroo.Core.csproj.CoreCompileInputs.cache
+C:\Users\Daniel\Desktop\Quizeroo\quizerooBackend\quizeroo.Core\obj\Release\net6.0\quizeroo.Core.dll
+C:\Users\Daniel\Desktop\Quizeroo\quizerooBackend\quizeroo.Core\obj\Release\net6.0\refint\quizeroo.Core.dll
+C:\Users\Daniel\Desktop\Quizeroo\quizerooBackend\quizeroo.Core\obj\Release\net6.0\quizeroo.Core.pdb
+C:\Users\Daniel\Desktop\Quizeroo\quizerooBackend\quizeroo.Core\obj\Release\net6.0\ref\quizeroo.Core.dll
