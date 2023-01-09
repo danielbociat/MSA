@@ -1,11 +1,12 @@
 {
   "name": "quizeroo",
   "version": "0.0.1",
+  "main": "node_modules/expo/AppEntry.js",
   "private": true,
   "scripts": {
     "android": "react-native run-android",
     "ios": "react-native run-ios",
-    "start": "react-native start",
+    "start": "npx expo start",
     "test": "jest",
     "lint": "eslint ."
   },
