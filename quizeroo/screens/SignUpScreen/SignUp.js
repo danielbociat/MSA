@@ -17,7 +17,7 @@ const SignUp = ( {navigation} ) => {
   const [errorMessage, setErrorMessage] = useState('');
   const [emailValidError, setEmailValidError] = useState('');
 
-  apiUrl = "https://quizeroo.azurewebsites.net/api/"
+  const apiUrl = "https://quizeroo.azurewebsites.net/api/"
 
   const onRegisterPressed = async () => {
     if (username === '') {
@@ -53,9 +53,9 @@ const SignUp = ( {navigation} ) => {
         setErrorMessage(responseJson.errorMessage);
       }
       else{
-        console.warn("Add navigation here!!!");
+        navigation.navigate("Login");
       }
-      
+
     }catch(error){}
   };
 

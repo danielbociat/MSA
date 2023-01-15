@@ -11,13 +11,30 @@ import Logo from '../../Images/Untitled_Artwork.png';
 import CustomInput from '../../components/CustomInput';
 import CustomButton from '../../components/CustomButton';
 
+const apiUrl = "https://quizeroo.azurewebsites.net/api/"
+
 const Login = ( {navigation} ) => {
     const {height} = useWindowDimensions();
     const [username , setUsername] = useState('');
     const [password , setPassword] = useState('');
 
-    const onLoginPressed = () => {
-        console.warn("Sign in");
+    const onLoginPressed = async () => {
+        try{
+            const response = await fetch(apiUrl + 'auth', {
+              method: 'POST',
+              headers: {'Content-Type': 'application/json'},
+              body: JSON.stringify({"username":username, "password": password}),
+            })
+            const responseJson = await response.json(); 
+      
+            if(!response.ok){
+              console.warn("SCANDAL");
+            }
+            else{
+              console.warn("Add navigation here!!!");
+            }
+            
+          }catch(error){}
     };
     const onForgotPasswordPressed= () => {
         console.warn("onForgotPasswordPressed");
