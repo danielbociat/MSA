@@ -9,7 +9,7 @@ import {
 import CustomInput from '../../components/CustomInput';
 import CustomButton from '../../components/CustomButton';
 import background from '../../Images/Background.png';
-const SignUp = () => {
+const SignUp = ( {navigation} ) => {
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -27,7 +27,7 @@ const SignUp = () => {
   };
 
   const onLoginPressed = () => {
-    console.warn('onLoginPressed');
+    navigation.navigate('Login')
   };
 
   const onTermsOfUse = () => {
