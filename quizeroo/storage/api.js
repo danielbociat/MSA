@@ -1,0 +1,1 @@
+export const apiUrl = "https://quizeroo.azurewebsites.net/api/";

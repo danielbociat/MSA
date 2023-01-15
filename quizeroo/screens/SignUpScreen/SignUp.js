@@ -9,6 +9,8 @@ import {
 import CustomInput from '../../components/CustomInput';
 import CustomButton from '../../components/CustomButton';
 import background from '../../Images/Background.png';
+import {apiUrl} from '../../storage/api';
+
 const SignUp = ( {navigation} ) => {
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
@@ -16,8 +18,6 @@ const SignUp = ( {navigation} ) => {
   const [passwordRepeat, setPasswordRepeat] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
   const [emailValidError, setEmailValidError] = useState('');
-
-  const apiUrl = "https://quizeroo.azurewebsites.net/api/"
 
   const onRegisterPressed = async () => {
     if (username === '') {

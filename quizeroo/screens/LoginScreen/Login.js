@@ -10,8 +10,8 @@ import {
 import Logo from '../../Images/Untitled_Artwork.png';
 import CustomInput from '../../components/CustomInput';
 import CustomButton from '../../components/CustomButton';
-
-const apiUrl = "https://quizeroo.azurewebsites.net/api/"
+import { getData, storeData } from "../../storage/storage";
+import {apiUrl} from '../../storage/api';
 
 const Login = ( {navigation} ) => {
     const {height} = useWindowDimensions();
@@ -31,15 +31,17 @@ const Login = ( {navigation} ) => {
               console.warn("SCANDAL");
             }
             else{
-              console.warn("Add navigation here!!!");
+                await storeData("token", response.token);
+                console.warn("Add navigation here!!!");
             }
-            
           }catch(error){}
     };
+
     const onForgotPasswordPressed= () => {
         console.warn("onForgotPasswordPressed");
 
     };
+    
     const onSignUpPressed = () => {
         navigation.navigate('SignUp');
     };
