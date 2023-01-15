@@ -1,4 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using quizeroo.Core.Database;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -8,18 +10,28 @@ namespace quizeroo.API.Controllers
     [ApiController]
     public class QuizController : ControllerBase
     {
+        private readonly ApplicationDbContext _dbContext;
+        public QuizController(ApplicationDbContext dbContext)
+        {
+            _dbContext = dbContext;
+        }
+
         // GET: api/<QuizController>
         [HttpGet]
-        public IEnumerable<string> Get()
+        public async Task<IActionResult> Get([FromBody] string token) /// TODO: Validate token
         {
-            return new string[] { "value1", "value2" };
+            var quizes = await _dbContext.Quizes.ToListAsync();
+
+            return Ok(quizes);
         }
 
         // GET api/<QuizController>/5
         [HttpGet("{id}")]
-        public string Get(int id)
+        public async Task<IActionResult> GetById(int id, [FromBody] string token) /// TODO: Validate token
         {
-            return "value";
+            var quiz = await _dbContext.Quizes.Where(q => q.Id == id).ToListAsync();
+
+            return Ok(quiz);
         }
 
         // POST api/<QuizController>

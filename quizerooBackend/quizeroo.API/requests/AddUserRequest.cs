@@ -1,6 +1,4 @@
-﻿using quizeroo.Core.Models;
-
-namespace quizeroo.API.requests
+﻿namespace quizeroo.API.requests
 {
     public class AddUserRequest
     {
