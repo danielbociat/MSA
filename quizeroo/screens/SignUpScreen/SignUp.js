@@ -14,16 +14,46 @@ const SignUp = ( {navigation} ) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [passwordRepeat, setPasswordRepeat] = useState('');
+  const [errorMessage, setErrorMessage] = useState('');
+  const [emailValidError, setEmailValidError] = useState('');
 
   const onRegisterPressed = () => {
-    console.warn(username, email, password);
+    if (username === '') {
+      setErrorMessage('Username is mandatory!');
+      return;
+    }
 
-    fetch('https://localhost:7128/api/' + 'users', {
+    if (email === '') {
+      setErrorMessage('Email is mandatory!');
+      return;
+    }
+
+    if (password === '') {
+      setErrorMessage('Password is mandatory!');
+      return;
+    }
+
+    if (password !== passwordRepeat) {
+      setErrorMessage('Passwords are not matching!');
+      return;
+    }
+
+    setErrorMessage('');
+    fetch(apiUrl + 'users', {
       method: 'POST',
       body: JSON.stringify({username, email, password}),
     })
       .then(() => {})
       .catch(e => console.log(e));
+  };
+  const handleValidEmail = val => {
+    let reg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w\w+)+$/;
+
+     if (reg.test(val) === false) {
+      setEmailValidError('Please enter a valid e-mail address');
+    } else if (reg.test(val) === true) {
+      setEmailValidError('');
+    }
   };
 
   const onLoginPressed = () => {
@@ -49,14 +79,26 @@ const SignUp = ( {navigation} ) => {
 
           <CustomInput
             placeholder="Username"
+            placeholderTextColor="#fff"
             value={username}
             setValue={setUsername}
           />
 
-          <CustomInput placeholder="Email" value={email} setValue={setEmail} />
+         
+          <CustomInput
+            placeholder="Email"
+            placeholderTextColor="#fff"
+            value={email}
+            setValue={setEmail}
+            onChangeText={value => {
+              setEmail(value);
+              handleValidEmail(value);
+            }}
+          />
 
           <CustomInput
             placeholder="Password"
+            placeholderTextColor="#fff"
             value={password}
             setValue={setPassword}
             secureTextEntry
@@ -64,10 +106,14 @@ const SignUp = ( {navigation} ) => {
 
           <CustomInput
             placeholder="Confirm Password"
+            placeholderTextColor="#fff"
             value={passwordRepeat}
             setValue={setPasswordRepeat}
             secureTextEntry
           />
+
+          {errorMessage !== '' && <Text>{errorMessage}</Text>}
+          {emailValidError ? <Text>{emailValidError}</Text> : null}
 
           <CustomButton text="Register" onPress={onRegisterPressed} />
 

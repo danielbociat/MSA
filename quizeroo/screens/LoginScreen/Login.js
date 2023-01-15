@@ -1,8 +1,15 @@
-import React , {useState} from 'react'
-import {View, Text , StyleSheet ,useWindowDimensions, Image , ScrollView} from 'react-native'
-import Logo from  '../../Images/Untitled_Artwork.png'
-import CustomInput from '../../components/CustomInput'
-import CustomButton from '../../components/CustomButton'
+import React, {useState} from 'react';
+import {
+  View,
+  Text,
+  StyleSheet,
+  useWindowDimensions,
+  Image,
+  ScrollView,
+} from 'react-native';
+import Logo from '../../Images/Untitled_Artwork.png';
+import CustomInput from '../../components/CustomInput';
+import CustomButton from '../../components/CustomButton';
 
 const Login = ( {navigation} ) => {
     const {height} = useWindowDimensions();
@@ -37,7 +44,8 @@ const Login = ( {navigation} ) => {
                 <CustomInput 
                 placeholder = "Password" 
                 value={password} 
-                setValue={setPassword}/>
+                setValue={setPassword}
+                secureTextEntry/>
                 
                 <CustomButton text="Sign In" onPress={onLoginPressed} />
                 
