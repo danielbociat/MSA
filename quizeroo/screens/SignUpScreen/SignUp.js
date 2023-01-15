@@ -17,7 +17,9 @@ const SignUp = ( {navigation} ) => {
   const [errorMessage, setErrorMessage] = useState('');
   const [emailValidError, setEmailValidError] = useState('');
 
-  const onRegisterPressed = () => {
+  apiUrl = "https://quizeroo.azurewebsites.net/api/"
+
+  const onRegisterPressed = async () => {
     if (username === '') {
       setErrorMessage('Username is mandatory!');
       return;
@@ -39,13 +41,25 @@ const SignUp = ( {navigation} ) => {
     }
 
     setErrorMessage('');
-    fetch(apiUrl + 'users', {
-      method: 'POST',
-      body: JSON.stringify({username, email, password}),
-    })
-      .then(() => {})
-      .catch(e => console.log(e));
+    try{
+      const response = await fetch(apiUrl + 'users', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({"username":username, "email": email, "password": password}),
+      })
+      const responseJson = await response.json(); 
+
+      if(!response.ok){
+        setErrorMessage(responseJson.errorMessage);
+      }
+      else{
+        console.warn("Add navigation here!!!");
+      }
+      
+    }catch(error){}
   };
+
+
   const handleValidEmail = val => {
     let reg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w\w+)+$/;
 

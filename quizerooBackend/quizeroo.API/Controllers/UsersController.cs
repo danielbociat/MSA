@@ -5,6 +5,8 @@ using quizeroo.Core.Database;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using System.Security.Cryptography;
+using System.Text;
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace quizeroo.API.Controllers
@@ -14,7 +16,7 @@ namespace quizeroo.API.Controllers
     public class UsersController : ControllerBase
     {
         private readonly ApplicationDbContext _dbContext;
-        public UsersController(ApplicationDbContext dbContext)
+        public UsersController( ApplicationDbContext dbContext)
         {
             _dbContext = dbContext;
         }
@@ -39,11 +41,25 @@ namespace quizeroo.API.Controllers
         [HttpPost]
         public async Task<IActionResult> AddUser(AddUserRequest User)
         {
-            var user = new User() { Username = User.Username, Email = User.Email, Password = User.Password };
-            await _dbContext.Users.AddAsync(user);
-            //await _dbContext.SaveChangesAsync();
+            var userEmail = await _dbContext.Users.Where(u => u.Email == User.Email).FirstOrDefaultAsync();
+            var userUsername = await _dbContext.Users.Where(u => u.Username == User.Username).FirstOrDefaultAsync();
 
-            return Ok(user);
+            if(userEmail != null)
+            {
+                return BadRequest(new {errorMessage = "Email already in use" });
+            }
+
+            if(userUsername != null)
+            {
+                return BadRequest(new { errorMessage = "Username is already taken" });
+            }
+
+            SHA256 mySHA256 = SHA256.Create();
+            var result = new User() { Username = User.Username, Email = User.Email, Password = Convert.ToHexString(mySHA256.ComputeHash(Encoding.UTF8.GetBytes(User.Password))) };
+            await _dbContext.Users.AddAsync(result);
+            await _dbContext.SaveChangesAsync();
+
+            return Ok(result);
         }
 
         // PUT api/<UsersController>/5
