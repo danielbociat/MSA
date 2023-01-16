@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {
   View,
   Text,
@@ -8,32 +8,53 @@ import {
   Pressable,
   TouchableOpacity,
 } from 'react-native';
+import {apiUrl} from '../../storage/api';
 import {useNavigation} from '@react-navigation/native';
 
 const MainPage = ({navigation}) => {
-  return (
-    <ScrollView style={{flex: 1}} contentContainerStyle={{flexGrow: 1}}>
-      <View style={styles.view}>
-        {categories.map(({name}, key) => (
-          <Pressable
-            key={key}
-            style={styles.category}
-            onPress={() => navigation.navigate('Category', {title: name})}>
-            <Text style={styles.Text}>{name}</Text>
-          </Pressable>
-        ))}
-      </View>
 
-      <View style={styles.cont}>
+  const [quizes, setQuizes] = useState([]);
+
+  useEffect(() => {
+      fetch(apiUrl + 'Quiz', {
+          method: 'GET',
+          headers: {'Content-Type': 'application/json'},
+      })
+      .then(response => {
+        if(response.ok) return response.json();
+        throw response;
+      })
+      .then(data => {setQuizes(quizesTst)})
+      .catch(error => {
+        console.warn(error);
+      })
+  });
+   
+  return (
+    <>
+      <ScrollView style={{flex: 1}} contentContainerStyle={{flexGrow: 1}}>
+        <View style={styles.view}>
+          {quizes.map(({name}, key) => (
+            <Pressable
+              key={key}
+              style={styles.category}
+              onPress={() => navigation.navigate('Quiz', {title: name})}>
+              <Text style={styles.Text}>{name}</Text>
+            </Pressable>
+          ))}
+        </View>
+      </ScrollView>
+
+      <View style={styles.createBttn}>
         <TouchableOpacity
-          onPress={() => navigation.navigate('CreateCategory')}
+          onPress={() => navigation.navigate('CreateQuiz')}
           style={styles.create}>
           <Pressable>
-            <Text style={styles.Text2}>Create a new quizz</Text>
+            <Text style={styles.Text2}>Create a new quiz</Text>
           </Pressable>
         </TouchableOpacity>
       </View>
-    </ScrollView>
+    </>
   );
 };
 
@@ -56,8 +77,8 @@ const styles = StyleSheet.create({
     color: 'black',
   },
   view: {
-    marginTop: 60,
-    height:'80%',
+    marginTop: 40,
+    height:'90%',
     //   backgroundColor: "black",
     //   flex: 1,
   },
@@ -77,28 +98,38 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     color: '#E6D254',
   },
-  cont: {
+  createBttn: {
     backgroundColor: '#E6D254',
-    height: '20%',
-    borderRadiusTop: 15,
-    
+    height: '15%',
     alignContent: 'center',
-
   },
 });
 
 export default MainPage;
 
-const categories = [
+const quizesTst = [
   {
-    name: 'Quizz 1',
+    name: 'Quiz 1',
   },
-
   {
-    name: 'Quizz 2',
+    name: 'Quiz 2',
   },
-
   {
-    name: 'Quizz 3',
+    name: 'Quiz 3',
+  },
+  {
+    name: 'Quiz 4',
+  },
+  {
+    name: 'Quiz 5',
+  },
+  {
+    name: 'Quiz 6',
+  },
+  {
+    name: 'Quiz 7',
+  },
+  {
+    name: 'Quiz 8',
   },
 ];

@@ -2,7 +2,7 @@ import {View, Text, ScrollView, Pressable, StyleSheet} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import {Icon} from 'react-native-elements';
 
-const Category = ({
+const Quiz = ({
   navigation,
   route: {
     params: {title},
@@ -43,6 +43,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Category;
-
-const title = 'gfdgf';
+export default Quiz;
