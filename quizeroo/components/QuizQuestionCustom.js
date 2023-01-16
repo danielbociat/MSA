@@ -7,12 +7,19 @@ import {
   TextInput,
   ScrollView,
 } from 'react-native';
+import Answer from './Answer';
+import CustomInput from './CustomInput';
+import Question from './Question';
 
 const QuizQuestionCustom = ({}) => {
   return (
     <ScrollView>
       <View style={styles.contain}>
-        <Text>jsrferd</Text>
+        <Question placeholder="Q:" placeholderTextColor={'black'}></Question>
+        <Answer></Answer>
+        <Answer></Answer>
+        <Answer></Answer>
+        <Answer></Answer>
       </View>
     </ScrollView>
   );
@@ -20,7 +27,13 @@ const QuizQuestionCustom = ({}) => {
 
 const styles = StyleSheet.create({
   contain: {
-    backgroundColor: '#E8F1F2',
+    backgroundColor: '#E6D254',
+    width: '90%',
+    borderRadius: 15,
+    borderColor:'black',
+    borderWidth:2,
+    
+    alignSelf: 'center',
   },
 });
 
