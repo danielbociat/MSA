@@ -36,6 +36,7 @@ namespace quizeroo.API.Controllers
 
         // GET api/<QuizController>/5
         [HttpGet("{id}")]
+        [Authorize]
         public async Task<IActionResult> GetById(int id) /// TODO: Validate token
         {
             var quiz = await _dbContext.Quizes.Where(q => q.Id == id).FirstAsync();
@@ -50,18 +51,6 @@ namespace quizeroo.API.Controllers
         public void Post()
         {
             var user_id = HttpContext.User.FindFirstValue("userId");
-        }
-
-        // PUT api/<QuizController>/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
-        {
-        }
-
-        // DELETE api/<QuizController>/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
         }
     }
 }

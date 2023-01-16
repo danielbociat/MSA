@@ -5,6 +5,7 @@ using quizeroo.Core.Database;
 using Microsoft.EntityFrameworkCore;
 using System.Security.Cryptography;
 using System.Text;
+using Microsoft.AspNetCore.Authorization;
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace quizeroo.API.Controllers
@@ -21,6 +22,7 @@ namespace quizeroo.API.Controllers
 
         // GET: api/<UsersController>
         [HttpGet]
+        [Authorize]
         public async Task<IActionResult> Get()
         {
             var users = await _dbContext.Users.ToListAsync();
@@ -30,6 +32,7 @@ namespace quizeroo.API.Controllers
 
         // GET api/<UsersController>/5
         [HttpGet("{id}")]
+        [Authorize]
         public string Get(int id)
         {
             return "value";
@@ -58,18 +61,6 @@ namespace quizeroo.API.Controllers
             await _dbContext.SaveChangesAsync();
 
             return Ok(result);
-        }
-
-        // PUT api/<UsersController>/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
-        {
-        }
-
-        // DELETE api/<UsersController>/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
         }
     }
 }
