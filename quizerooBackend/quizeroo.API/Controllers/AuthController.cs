@@ -16,10 +16,12 @@ namespace quizeroo.API.Controllers
     {
         private readonly ApplicationDbContext _dbContext;
         private readonly SHA256 _sha256;
-        public AuthController(ApplicationDbContext dbContext)
+        private readonly IConfiguration _configuration;
+        public AuthController(ApplicationDbContext dbContext, IConfiguration configuration)
         {
             _dbContext = dbContext;
-            _sha256 = SHA256.Create(); 
+            _sha256 = SHA256.Create();
+            _configuration = configuration;
         }
 
 
@@ -32,14 +34,15 @@ namespace quizeroo.API.Controllers
             if (user == null)
                 return BadRequest("User does not exist or wrong password!");
 
-            var key = _sha256.ComputeHash(Encoding.UTF8.GetBytes("Key")); /// come up with something smarter
+            var key = Encoding.UTF8.GetBytes(_configuration["Jwt:Key"]);
 
             var tokenHandler = new JwtSecurityTokenHandler();
             var claims = new List<Claim>
                 {
                     new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
                     new Claim(JwtRegisteredClaimNames.Email, user.Email),
-                    new Claim(ClaimTypes.Name, user.Username)
+                    new Claim(ClaimTypes.Name, user.Username),
+                    new Claim("userId", user.Id.ToString())
                 };
             var tokenDescriptor = new SecurityTokenDescriptor
             {

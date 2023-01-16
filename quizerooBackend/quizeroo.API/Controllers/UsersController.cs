@@ -2,8 +2,6 @@
 using quizeroo.API.requests;
 using quizeroo.Core.Models;
 using quizeroo.Core.Database;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using System.Security.Cryptography;
 using System.Text;
