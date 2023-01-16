@@ -49,9 +49,7 @@ const MainPage = ({navigation}) => {
         <TouchableOpacity
           onPress={() => navigation.navigate('CreateQuiz')}
           style={styles.create}>
-          <Pressable>
-            <Text style={styles.Text2}>Create a new quiz</Text>
-          </Pressable>
+            <Text style={styles.Text2}>Create a new quizz</Text>
         </TouchableOpacity>
       </View>
     </>
