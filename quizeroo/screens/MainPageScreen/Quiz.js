@@ -1,6 +1,14 @@
-import {View, Text, ScrollView, Pressable, StyleSheet} from 'react-native';
+import {
+  View,
+  Text,
+  ScrollView,
+  Pressable,
+  StyleSheet,
+  Image,
+} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import {Icon} from 'react-native-elements';
+import back from '../../Images/back.png';
 
 const Quiz = ({
   navigation,
@@ -11,13 +19,14 @@ const Quiz = ({
   return (
     <View>
       <Pressable onPress={() => navigation.goBack()}>
-        <Text>back</Text>
+        <Image source={back} style={styles.image}></Image>
       </Pressable>
       <ScrollView>
         <View>
           <Text style={styles.Title}>{title}</Text>
+          <Text style={styles.Text2}>Questions :</Text>
           <View>
-            <Text style={styles.Text2}>Questions :</Text>
+            
           </View>
         </View>
       </ScrollView>
@@ -39,7 +48,14 @@ const styles = StyleSheet.create({
   Text2: {
     fontWeight: 'normal',
     fontSize: 22,
-    padding: 8,
+    padding: 10,
+    // textDecorationLine: "underline",
+  },
+  image: {
+    marginTop: 15,
+    marginLeft: 10,
+    height: 30,
+    width: 30,
   },
 });
 
