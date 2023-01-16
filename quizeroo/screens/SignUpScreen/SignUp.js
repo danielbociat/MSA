@@ -11,7 +11,7 @@ import CustomButton from '../../components/CustomButton';
 import background from '../../Images/Background.png';
 import {apiUrl} from '../../storage/api';
 
-const SignUp = ( {navigation} ) => {
+const SignUp = ({navigation}) => {
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -41,29 +41,30 @@ const SignUp = ( {navigation} ) => {
     }
 
     setErrorMessage('');
-    try{
+    try {
       const response = await fetch(apiUrl + 'users', {
         method: 'POST',
         headers: {'Content-Type': 'application/json'},
-        body: JSON.stringify({"username":username, "email": email, "password": password}),
-      })
-      const responseJson = await response.json(); 
+        body: JSON.stringify({
+          username: username,
+          email: email,
+          password: password,
+        }),
+      });
+      const responseJson = await response.json();
 
-      if(!response.ok){
+      if (!response.ok) {
         setErrorMessage(responseJson.errorMessage);
+      } else {
+        navigation.navigate('Login');
       }
-      else{
-        navigation.navigate("Login");
-      }
-
-    }catch(error){}
+    } catch (error) {}
   };
-
 
   const handleValidEmail = val => {
     let reg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w\w+)+$/;
 
-     if (reg.test(val) === false) {
+    if (reg.test(val) === false) {
       setEmailValidError('Please enter a valid e-mail address');
     } else if (reg.test(val) === true) {
       setEmailValidError('');
@@ -71,7 +72,7 @@ const SignUp = ( {navigation} ) => {
   };
 
   const onLoginPressed = () => {
-    navigation.navigate('Login')
+    navigation.navigate('Login');
   };
 
   const onTermsOfUse = () => {
@@ -98,7 +99,6 @@ const SignUp = ( {navigation} ) => {
             setValue={setUsername}
           />
 
-         
           <CustomInput
             placeholder="Email"
             placeholderTextColor="#fff"
@@ -165,7 +165,7 @@ const styles = StyleSheet.create({
   },
   title: {
     alignItems: 'center',
-    fontSize: 24,
+    fontSize: 30,
     fontWeight: 'bold',
     color: 'black',
     margin: 10,
