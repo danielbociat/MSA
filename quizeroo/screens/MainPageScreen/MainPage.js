@@ -28,9 +28,9 @@ const MainPage = ({navigation}) => {
         <TouchableOpacity
           onPress={() => navigation.navigate('CreateCategory')}
           style={styles.create}>
-          <Pressable>
+          
             <Text style={styles.Text2}>Create a new quizz</Text>
-          </Pressable>
+          
         </TouchableOpacity>
       </View>
     </ScrollView>
