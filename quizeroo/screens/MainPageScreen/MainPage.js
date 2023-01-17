@@ -11,6 +11,7 @@ import {
 import {apiUrl} from '../../storage/api';
 import {useNavigation} from '@react-navigation/native';
 
+
 const MainPage = ({navigation}) => {
 
   const [quizes, setQuizes] = useState([]);
@@ -77,6 +78,7 @@ const styles = StyleSheet.create({
   view: {
     marginTop: 40,
     height:'90%',
+    backgroundColor:'white',
     //   backgroundColor: "black",
     //   flex: 1,
   },

@@ -6,51 +6,54 @@ import {
   useWindowDimensions,
   TextInput,
 } from 'react-native';
+import {RotateInDownLeft} from 'react-native-reanimated';
 
-const Answer = ({
-    value,
-    setValue,
-    placeholder,
-    placeholderTextColor,
-    
-  }) => {
-    return (
-      <View style={styles.container}>
-        
-        <TextInput
-          value={value}
-          onChangeText={setValue}
-          placeholder={placeholder}
-          placeholderTextColor={placeholderTextColor}
-          style={styles.input}
-         
-        />
-      </View>
-    );
-  };
+const Answer = ({value, setValue, placeholder, placeholderTextColor, text}) => {
+  return (
+    <View style={styles.container}>
+      <Text style={styles.textA} >
+        {text}
+      </Text>
+      <TextInput
+        value={value}
+        onChangeText={setValue}
+        placeholder={placeholder}
+        //placeholderTextColor={placeholderTextColor}
+        style={styles.input}
+      />
+    </View>
+  );
+};
 
-  const styles = StyleSheet.create({
-    container: {
-        backgroundColor: '#001a23',
-        width: '90%',
-        alignSelf:'center',
-    
-        borderRadius: 10,
-        height: 45,
-        borderWidth: 1,
-        borderColor: '#e8f1f2',
-    
-        //padding: 18,
-        marginVertical: 10,
-    },
-    input: {
-        color: 'black',
-        height: 60,
-        fontWeight:'bold',
-        fontSize: 22,
-        
-        
-      },
+const styles = StyleSheet.create({
+  container: {
+    flexDirection: 'row',
+    backgroundColor: '#001a23',
+    width: '90%',
+    alignSelf: 'center',
+    alignContent: 'space-around',
+    borderRadius: 10,
+    height: 45,
+    borderWidth: 1,
+    borderColor: '#e8f1f2',
 
-})
-  export default Answer;
+    //padding: 18,
+    marginVertical: 6,
+  },
+  input: {
+    color: 'white',
+    fontWeight: 'normal',
+    fontSize: 16,
+  },
+  textA: {
+    color: 'white',
+    fontSize: 16,
+    alignSelf: 'flex-start',
+    marginVertical: 10,
+    marginLeft: 8,
+    fontWeight: 'bold',
+    //flexGrow:'row',
+    //textAlign: 'start',
+  },
+});
+export default Answer;
