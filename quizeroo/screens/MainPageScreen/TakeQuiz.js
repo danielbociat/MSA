@@ -13,34 +13,13 @@ import back from '../../Images/back.png';
 import {getData, storeData} from '../../storage/storage';
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
-const Quiz = ({
+const TakeQuiz = ({
   navigation,
   route: {
-    params: {title, id},
+    params: {questions},
   },
 }) => {
-  const [currentQuiz, setCurrentQuiz] = useState();
-  const [questions, setQuestions] = useState();
-
-  const [token, setToken] = useState("");
-
-  useEffect(() => {
-      AsyncStorage.getItem('token').then(tk => setToken(tk));
-      fetch(apiUrl + 'Quiz/' + id, {
-          method: 'GET',
-          headers: {'Authorization': 'Bearer ' + token, 'Content-Type': 'application/json'},
-      })
-      .then(response => {
-        if(response.ok) return response.json();
-        throw response;
-      })
-      .then(data => {
-        setCurrentQuiz(data);
-        setQuestions(data.quiz_questions);
-      })
-      .catch(error => {});
-    }
-  );
+  const [currentQuestion, setCurrentQuestion] = useState(0);
 
   return (
     <View>
@@ -48,13 +27,7 @@ const Quiz = ({
         <Image source={back} style={styles.image}></Image>
       </Pressable>
         <View>
-          <Text style={styles.Title}>{title}</Text>
-          <Pressable
-              disabled = {questions ? false : true}
-              style={questions ? styles.startbtn : styles.startbtn_disabled}
-              onPress={() => navigation.navigate('TakeQuiz', {questions: questions})}>
-              <Text style={styles.Text}>START QUIZ</Text>
-          </Pressable>
+          <Text style={styles.Title}>{questions[currentQuestion].question}</Text>
       </View>
     </View>
   );
@@ -109,4 +82,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Quiz;
+export default TakeQuiz;

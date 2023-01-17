@@ -7,7 +7,7 @@ import {createStackNavigator} from '@react-navigation/stack';
 import {NavigationContainer, useNavigationContainerRef} from '@react-navigation/native';
 import Quiz from './screens/MainPageScreen/Quiz';
 import CreateQuiz from './screens/MainPageScreen/CreateQuiz';
-
+import TakeQuiz from './screens/MainPageScreen/TakeQuiz';
 
 const Stack = createStackNavigator();
 
@@ -19,6 +19,7 @@ const App = () => {
         <Stack.Screen name="SignUp" component={SignUp} options={{headerShown: false}} />
         <Stack.Screen name="MainPage" component={MainPage} options={{headerShown: false}} />
         <Stack.Screen name="Quiz" component={Quiz} options={{headerShown: false}} />
+        <Stack.Screen name="TakeQuiz" component={TakeQuiz} options={{headerShown: false}}/>
         <Stack.Screen name="CreateQuiz" component={CreateQuiz} options={{headerShown: false}}/>
       </Stack.Navigator>
     </NavigationContainer>
