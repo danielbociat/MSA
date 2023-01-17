@@ -15,9 +15,11 @@ namespace quizeroo.API.Controllers
     public class UsersController : ControllerBase
     {
         private readonly ApplicationDbContext _dbContext;
+        private readonly SHA256 _sha256;
         public UsersController( ApplicationDbContext dbContext)
         {
             _dbContext = dbContext;
+            _sha256 = SHA256.Create();
         }
 
         // GET: api/<UsersController>
@@ -55,8 +57,7 @@ namespace quizeroo.API.Controllers
                 return BadRequest(new { errorMessage = "Username is already taken" });
             }
 
-            SHA256 mySHA256 = SHA256.Create();
-            var result = new User() { Username = User.Username, Email = User.Email, Password = Convert.ToHexString(mySHA256.ComputeHash(Encoding.UTF8.GetBytes(User.Password))) };
+            var result = new User() { Username = User.Username, Email = User.Email, Password = Convert.ToHexString(_sha256.ComputeHash(Encoding.UTF8.GetBytes(User.Password))) };
             await _dbContext.Users.AddAsync(result);
             await _dbContext.SaveChangesAsync();
 

@@ -8,7 +8,6 @@ import {
   TextInput,
 } from 'react-native';
 import {useNavigation} from '@react-navigation/native';
-import {Icon} from 'react-native-elements';
 import back from '../../Images/back.png';
 import CustomTitle from '../../components/CustomTitle';
 import QuizQuestionCustom from '../../components/QuizQuestionCustom';

@@ -4,6 +4,7 @@ C:\Users\Daniel\Desktop\Quizeroo\quizerooBackend\quizeroo.API\obj\Release\net6.0
 C:\Users\Daniel\Desktop\Quizeroo\quizerooBackend\quizeroo.API\obj\Release\net6.0\PubTmp\Out\quizeroo.API.dll
 C:\Users\Daniel\Desktop\Quizeroo\quizerooBackend\quizeroo.API\obj\Release\net6.0\PubTmp\Out\quizeroo.API.runtimeconfig.json
 C:\Users\Daniel\Desktop\Quizeroo\quizerooBackend\quizeroo.API\obj\Release\net6.0\PubTmp\Out\quizeroo.API.pdb
+C:\Users\Daniel\Desktop\Quizeroo\quizerooBackend\quizeroo.API\obj\Release\net6.0\PubTmp\Out\Microsoft.AspNetCore.Authentication.JwtBearer.dll
 C:\Users\Daniel\Desktop\Quizeroo\quizerooBackend\quizeroo.API\obj\Release\net6.0\PubTmp\Out\Microsoft.Data.SqlClient.dll
 C:\Users\Daniel\Desktop\Quizeroo\quizerooBackend\quizeroo.API\obj\Release\net6.0\PubTmp\Out\Microsoft.EntityFrameworkCore.dll
 C:\Users\Daniel\Desktop\Quizeroo\quizerooBackend\quizeroo.API\obj\Release\net6.0\PubTmp\Out\Microsoft.EntityFrameworkCore.Abstractions.dll

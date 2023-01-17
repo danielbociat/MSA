@@ -21,21 +21,22 @@ const Login = ({navigation}) => {
   const [password, setPassword] = useState('');
 
   const onLoginPressed = async () => {
-    try {
-      const response = await fetch(apiUrl + 'auth', {
+      fetch(apiUrl + 'auth', {
         method: 'POST',
         headers: {'Content-Type': 'application/json'},
         body: JSON.stringify({username: username, password: password}),
-      });
-      const responseJson = await response.json();
-
-      if (!response.ok) {
-        console.warn('SCANDAL');
-      } else {
-        await storeData('token', response.token);
-        console.warn('Add navigation here!!!');
-      }
-    } catch (error) {}
+      })
+      .then(response => {
+        if(response.ok) return response.json();
+        throw response;
+      })
+      .then(data => {
+        storeData('token', data.token);
+        navigation.navigate('MainPage');
+      })
+      .catch(error => {
+        console.warn(error);
+      })
   };
 
   const onForgotPasswordPressed = () => {

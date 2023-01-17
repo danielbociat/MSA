@@ -62,3 +62,4 @@ C:\Users\Daniel\Desktop\Quizeroo\quizerooBackend\quizeroo.API\obj\Release\net6.0
 C:\Users\Daniel\Desktop\Quizeroo\quizerooBackend\quizeroo.API\obj\Release\net6.0\quizeroo.API.pdb
 C:\Users\Daniel\Desktop\Quizeroo\quizerooBackend\quizeroo.API\obj\Release\net6.0\quizeroo.API.genruntimeconfig.cache
 C:\Users\Daniel\Desktop\Quizeroo\quizerooBackend\quizeroo.API\obj\Release\net6.0\ref\quizeroo.API.dll
+C:\Users\Daniel\Desktop\Quizeroo\quizerooBackend\quizeroo.API\bin\Release\net6.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll

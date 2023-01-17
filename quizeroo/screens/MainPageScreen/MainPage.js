@@ -9,38 +9,42 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import {apiUrl} from '../../storage/api';
+import { GetToken } from "../../services/AuthStatus";
 import {useNavigation} from '@react-navigation/native';
-
+import {getData, storeData} from '../../storage/storage';
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const MainPage = ({navigation}) => {
 
   const [quizes, setQuizes] = useState([]);
+  const [token, setToken] = useState("");
 
   useEffect(() => {
-      fetch(apiUrl + 'Quiz', {
-          method: 'GET',
-          headers: {'Content-Type': 'application/json'},
-      })
-      .then(response => {
-        if(response.ok) return response.json();
-        throw response;
-      })
-      .then(data => {setQuizes(quizesTst)})
-      .catch(error => {
-        console.warn(error);
-      })
+    AsyncStorage.getItem('token').then(tk => setToken(tk));
+    fetch(apiUrl + 'Quiz', {
+        method: 'GET',
+        headers: {'Authorization': 'Bearer ' + token, 'Content-Type': 'application/json'},
+    })
+    .then(response => {
+      if(response.ok) return response.json();
+      throw response;
+    })
+    .then(data => {
+      setQuizes(data);
+    })
+    .catch(error => {})
   });
    
   return (
     <>
       <ScrollView style={{flex: 1}} contentContainerStyle={{flexGrow: 1}}>
         <View style={styles.view}>
-          {quizes.map(({name}, key) => (
+          {quizes.map(({title, id}, key) => (
             <Pressable
               key={key}
               style={styles.category}
-              onPress={() => navigation.navigate('Quiz', {title: name})}>
-              <Text style={styles.Text}>{name}</Text>
+              onPress={() => navigation.navigate('Quiz', {title: title, id: id})}>
+              <Text style={styles.Text}>{title}</Text>
             </Pressable>
           ))}
         </View>
@@ -109,27 +113,35 @@ export default MainPage;
 
 const quizesTst = [
   {
-    name: 'Quiz 1',
+    title: 'Quiz 1',
+    id: 1
   },
   {
-    name: 'Quiz 2',
+    title: 'Quiz 2',
+    id: 2
   },
   {
-    name: 'Quiz 3',
+    title: 'Quiz 3',
+    id: 3
   },
   {
-    name: 'Quiz 4',
+    title: 'Quiz 4',
+    id: 4
   },
   {
-    name: 'Quiz 5',
+    title: 'Quiz 5',
+    id: 5
   },
   {
-    name: 'Quiz 6',
+    title: 'Quiz 6',
+    id: 6
   },
   {
-    name: 'Quiz 7',
+    title: 'Quiz 7',
+    id: 7
   },
   {
-    name: 'Quiz 8',
+    title: 'Quiz 8',
+    id: 8
   },
 ];

@@ -5,7 +5,6 @@ import SignUp from './screens/SignUpScreen';
 import MainPage from './screens/MainPageScreen/MainPage';
 import {createStackNavigator} from '@react-navigation/stack';
 import {NavigationContainer, useNavigationContainerRef} from '@react-navigation/native';
-import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import Quiz from './screens/MainPageScreen/Quiz';
 import CreateQuiz from './screens/MainPageScreen/CreateQuiz';
 
@@ -16,11 +15,11 @@ const App = () => {
   return (
     <NavigationContainer>
       <Stack.Navigator>
+        <Stack.Screen name="Login" component={Login} options={{headerShown: false}} />
+        <Stack.Screen name="SignUp" component={SignUp} options={{headerShown: false}} />
         <Stack.Screen name="MainPage" component={MainPage} options={{headerShown: false}} />
         <Stack.Screen name="Quiz" component={Quiz} options={{headerShown: false}} />
         <Stack.Screen name="CreateQuiz" component={CreateQuiz} options={{headerShown: false}}/>
-        <Stack.Screen name="Login" component={Login} options={{headerShown: false}} />
-        <Stack.Screen name="SignUp" component={SignUp} options={{headerShown: false}} />
       </Stack.Navigator>
     </NavigationContainer>
   );
