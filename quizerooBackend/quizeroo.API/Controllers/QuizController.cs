@@ -42,7 +42,12 @@ namespace quizeroo.API.Controllers
         public async Task<IActionResult> GetById(int id)
         {
             var quiz = await _dbContext.Quizes.Where(q => q.Id == id).FirstAsync();
-            var questions = await _dbContext.QuizQuestions.Where(q => q.Id == quiz.Id).ToListAsync();
+            var questions = await _dbContext.QuizQuestions.Where(q => q.Id == quiz.Id).Select(q => new QuestionView{ 
+                id = q.Id,
+                question = q.Question,
+                answers = q.Answers.Select(a => a.Text).ToList(),
+                answers_id = q.Answers.Select(a => a.Id).ToList(),
+            }).ToListAsync();
 
             return Ok(new {title = quiz.QuizTitle, quiz_questions = questions});
         }
@@ -76,5 +81,7 @@ namespace quizeroo.API.Controllers
 
             return BadRequest();
         }
+
+
     }
 }
