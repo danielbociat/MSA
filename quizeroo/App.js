@@ -9,6 +9,7 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import Quiz from './screens/MainPageScreen/Quiz';
 import CreateQuiz from './screens/MainPageScreen/CreateQuiz';
 
+
 const Stack = createStackNavigator();
 
 const App = () => {
