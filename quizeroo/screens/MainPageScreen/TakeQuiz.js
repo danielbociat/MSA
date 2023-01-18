@@ -20,14 +20,23 @@ const TakeQuiz = ({
   },
 }) => {
   const [currentQuestion, setCurrentQuestion] = useState(0);
+  const [answered, setAnswered] = useState(false);
+  
+  const handleQuestionAnswer = (answer_id, question_id) => {
 
+    console.log(answer_id, question_id);
+    return ;
+  }
+  
+  console.log(questions);
   return (
     <View>
       <Pressable onPress={() => navigation.goBack()}>
         <Image source={back} style={styles.image}></Image>
       </Pressable>
-        <View>
-          <Text style={styles.Title}>{questions[currentQuestion].question}</Text>
+      <View>
+        <Text style={styles.Title}>{questions[currentQuestion].question}</Text>
+        { questions[currentQuestion].answers.map((a, key) => (<Pressable key={key} onPress={handleQuestionAnswer(a.id, questions[currentQuestion].id)} ><Text>{a.text}</Text></Pressable>)) }
       </View>
     </View>
   );
@@ -72,7 +81,6 @@ const styles = StyleSheet.create({
     fontWeight: 'normal',
     fontSize: 22,
     padding: 10,
-    // textDecorationLine: "underline",
   },
   image: {
     marginTop: 15,
