@@ -6,6 +6,7 @@ import {
   StyleSheet,
   Image,
   TextInput,
+  ImageBackground,
 } from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import back from '../../Images/back.png';
@@ -15,6 +16,7 @@ import AddButton from '../../components/AddButton';
 import LeftArrow from '../../components/LeftArrow';
 import RightArrow from '../../components/RightArrow';
 import {useState} from 'react';
+import quizImage from '../../Images/quizImage.png';
 
 const CreateQuiz = ({navigation}) => {
   const [step, setStep] = useState(0);
@@ -40,52 +42,56 @@ const CreateQuiz = ({navigation}) => {
   console.log(quiz);
 
   return (
-    <View style={styles.view}>
-      <ScrollView>
-      <View style={{flex: 1, justifyContent: 'flex-start'}}>
-        <Pressable onPress={() => navigation.goBack()}>
-          <Image source={back} style={styles.image}></Image>
-        </Pressable>
-        {step === 0 && (
-          <>
-            <Text style={styles.title}>Quizz name: </Text>
-            <CustomTitle
-              value={quiz.name}
-              setValue={val => setQuiz(prev => ({...prev, name: val}))}
-            />
-          </>
-        )}
+    <ScrollView style={{flex: 1}} contentContainerStyle={{flexGrow: 1}}>
+      <ImageBackground source={quizImage} style={styles.background}>
+        <View style={{flex: 1}}>
+          <Pressable onPress={() => navigation.goBack()}>
+            <Image source={back} style={styles.image}></Image>
+          </Pressable>
+          {step === 0 && (
+            <>
+              <Text style={styles.title}>Quizz name: </Text>
+              <CustomTitle
+                value={quiz.name}
+                setValue={val => setQuiz(prev => ({...prev, name: val}))}
+              />
+            </>
+          )}
 
-        {step !== 0 && (
-          <>
-            <Text style={styles.add}>Add your questions:</Text>
-            <QuizQuestionCustom quiz={quiz} setQuiz={setQuiz} step={step - 1} />
-          </>
-        )}
-      </View>
-      <View style={styles.view2}>
-        <AddButton onPress={() => handleNextStep()} />
-        {step !== 0 && (
-          <>
-            <View
-              style={{flexDirection: 'row', justifyContent: 'space-between'}}>
-              {step !== 0 ? (
-                <LeftArrow onPress={() => handlePrevStep()} />
-              ) : (
-                <View />
-              )}
-              <RightArrow onPress={() => handleNextStep()} />
-            </View>
-          </>
-        )}
-      </View>
-      </ScrollView>
-    </View>
+          {step !== 0 && (
+            <>
+              <Text style={styles.add}>Add your questions:</Text>
+              <QuizQuestionCustom
+                quiz={quiz}
+                setQuiz={setQuiz}
+                step={step - 1}
+              />
+            </>
+          )}
+        </View>
+        <View>
+          <AddButton onPress={() => handleNextStep()} />
+          {step !== 0 && (
+            <>
+              <View
+                style={{flexDirection: 'row', justifyContent: 'space-between'}}>
+                {step !== 0 ? (
+                  <LeftArrow onPress={() => handlePrevStep()} />
+                ) : (
+                  <View />
+                )}
+                <RightArrow onPress={() => handleNextStep()} />
+              </View>
+            </>
+          )}
+        </View>
+      </ImageBackground>
+    </ScrollView>
   );
 };
 const styles = StyleSheet.create({
   image: {
-    marginTop: 15,
+    marginTop: 25,
     marginLeft: 10,
     height: 30,
     width: 30,
@@ -94,10 +100,12 @@ const styles = StyleSheet.create({
     marginTop: 40,
   },
   title: {
-    fontSize: 20,
-    padding: 30,
+    fontSize: 38,
+    padding: 26,
     fontWeight: 'bold',
     color: 'black',
+    alignText:'center',
+    paddingLeft: 90,
   },
   add: {
     fontSize: 16,
@@ -110,6 +118,10 @@ const styles = StyleSheet.create({
     resizeMode: 'contain',
     flex: 1,
     justifyContent: 'space-between',
+  },
+  background: {
+    height: '100%',
+    resizeMode: 'cover',
   },
 });
 export default CreateQuiz;

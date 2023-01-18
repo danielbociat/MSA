@@ -9,55 +9,63 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import {apiUrl} from '../../storage/api';
-import { GetToken } from "../../services/AuthStatus";
+import {GetToken} from '../../services/AuthStatus';
 import {useNavigation} from '@react-navigation/native';
 import {getData, storeData} from '../../storage/storage';
-import AsyncStorage from "@react-native-async-storage/async-storage";
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import quizImage from '../../Images/quizImage.png';
 
 const MainPage = ({navigation}) => {
-
   const [quizes, setQuizes] = useState([]);
-  const [token, setToken] = useState("");
+  const [token, setToken] = useState('');
 
   useEffect(() => {
     AsyncStorage.getItem('token').then(tk => setToken(tk));
     fetch(apiUrl + 'Quiz', {
-        method: 'GET',
-        headers: {'Authorization': 'Bearer ' + token, 'Content-Type': 'application/json'},
+      method: 'GET',
+      headers: {
+        Authorization: 'Bearer ' + token,
+        'Content-Type': 'application/json',
+      },
     })
-    .then(response => {
-      if(response.ok) return response.json();
-      throw response;
-    })
-    .then(data => {
-      setQuizes(data);
-    })
-    .catch(error => {})
+      .then(response => {
+        if (response.ok) return response.json();
+        throw response;
+      })
+      .then(data => {
+        setQuizes(data);
+      })
+      .catch(error => {});
   });
-   
+
   return (
-    <>
-      <ScrollView style={{flex: 1}} contentContainerStyle={{flexGrow: 1}}>
-        <View style={styles.view}>
-          {quizes.map(({title, id}, key) => (
-            <Pressable
-              key={key}
-              style={styles.category}
-              onPress={() => navigation.navigate('Quiz', {title: title, id: id})}>
-              <Text style={styles.Text}>{title}</Text>
-            </Pressable>
-          ))}
-        </View>
-      </ScrollView>
+    <ScrollView style={{flex: 1}} contentContainerStyle={{flexGrow: 1}}>
+      
+        <ImageBackground
+          source={quizImage}
+          style={styles.background}
+         >
+     
+      <View style={styles.view}>
+        {quizes.map(({title, id}, key) => (
+          <Pressable
+            key={key}
+            style={styles.category}
+            onPress={() => navigation.navigate('Quiz', {title: title, id: id})}>
+            <Text style={styles.Text}>{title}</Text>
+          </Pressable>
+        ))}
+      </View>
 
       <View style={styles.createBttn}>
         <TouchableOpacity
           onPress={() => navigation.navigate('CreateQuiz')}
           style={styles.create}>
-            <Text style={styles.Text2}>Create a new quizz</Text>
+          <Text style={styles.Text2}>Create a new quizz</Text>
         </TouchableOpacity>
       </View>
-    </>
+      </ImageBackground>
+    </ScrollView>
   );
 };
 
@@ -71,7 +79,7 @@ const styles = StyleSheet.create({
     borderColor: 'black',
     borderWidth: 3,
     width: '80%',
-   
+
     alignSelf: 'center',
   },
   Text: {
@@ -80,9 +88,12 @@ const styles = StyleSheet.create({
     color: 'black',
   },
   view: {
-    marginTop: 40,
-    height:'90%',
-    backgroundColor:'white',
+    
+    height: '100%',
+    marginBottom: 0,
+    flex: 1,
+    paddingTop:50,
+
     //   backgroundColor: "black",
     //   flex: 1,
   },
@@ -107,6 +118,12 @@ const styles = StyleSheet.create({
     height: '15%',
     alignContent: 'center',
   },
+  background: {
+ 
+    height:'100%',
+    resizeMode: 'cover',
+  },
+ 
 });
 
 export default MainPage;

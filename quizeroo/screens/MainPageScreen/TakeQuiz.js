@@ -11,7 +11,8 @@ import {apiUrl} from '../../storage/api';
 import {useNavigation} from '@react-navigation/native';
 import back from '../../Images/back.png';
 import {getData, storeData} from '../../storage/storage';
-import AsyncStorage from "@react-native-async-storage/async-storage";
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import quizImage from '../../Images/quizImage.png';
 
 const TakeQuiz = ({
   navigation,
@@ -22,14 +23,18 @@ const TakeQuiz = ({
   const [currentQuestion, setCurrentQuestion] = useState(0);
 
   return (
-    <View>
-      <Pressable onPress={() => navigation.goBack()}>
-        <Image source={back} style={styles.image}></Image>
-      </Pressable>
+    <ScrollView style={{flex: 1}} contentContainerStyle={{flexGrow: 1}}>
+      <ImageBackground source={quizImage} style={styles.background}>
+        <Pressable onPress={() => navigation.goBack()}>
+          <Image source={back} style={styles.image}></Image>
+        </Pressable>
         <View>
-          <Text style={styles.Title}>{questions[currentQuestion].question}</Text>
-      </View>
-    </View>
+          <Text style={styles.Title}>
+            {questions[currentQuestion].question}
+          </Text>
+        </View>
+      </ImageBackground>
+    </ScrollView>
   );
 };
 const styles = StyleSheet.create({
@@ -65,7 +70,7 @@ const styles = StyleSheet.create({
     borderWidth: 3,
     borderRadius: 15,
     marginTop: 20,
-    opacity: 0.35
+    opacity: 0.35,
   },
 
   Text2: {
@@ -79,6 +84,10 @@ const styles = StyleSheet.create({
     marginLeft: 10,
     height: 30,
     width: 30,
+  },
+  background: {
+    height: '100%',
+    resizeMode: 'cover',
   },
 });
 
