@@ -12,6 +12,7 @@ import back from '../../Images/back.png';
 import CustomTitle from '../../components/CustomTitle';
 import QuizQuestionCustom from '../../components/QuizQuestionCustom';
 import AddButton from '../../components/AddButton';
+import CreateQuizButton from '../../components/CreateQuizButton';
 import LeftArrow from '../../components/LeftArrow';
 import RightArrow from '../../components/RightArrow';
 import {useState} from 'react';
@@ -30,14 +31,35 @@ const CreateQuiz = ({navigation}) => {
     }));
   };
 
+  const handleSubmitQuiz = () => {
+    var questionsBody = quiz.questions.map(q => ({questionText: q.questionText, answers: [
+      ({
+        answerText: q.answer,
+        isCorrect: true
+      }),
+      ({
+        answerText: q.a,
+        isCorrect: false
+      }),
+      ({
+        answerText: q.b,
+        isCorrect: false
+      }),
+      ({
+        answerText: q.c,
+        isCorrect: false
+      }),
+    ]}));
+    var quizBody = JSON.stringify({title: quiz.name, questions: questionsBody});
+    console.log(quizBody);
+  };
+
   const handleNextStep = () => {
     generateNewQuestion();
     setStep(prev => prev + 1);
   };
 
   const handlePrevStep = () => setStep(prev => prev - 1);
-
-  console.log(quiz);
 
   return (
     <View style={styles.view}>
@@ -53,6 +75,7 @@ const CreateQuiz = ({navigation}) => {
               value={quiz.name}
               setValue={val => setQuiz(prev => ({...prev, name: val}))}
             />
+            <AddButton onPress={() => handleNextStep()} />
           </>
         )}
 
@@ -64,21 +87,19 @@ const CreateQuiz = ({navigation}) => {
         )}
       </View>
       <View style={styles.view2}>
-        <AddButton onPress={() => handleNextStep()} />
-        {step !== 0 && (
-          <>
-            <View
-              style={{flexDirection: 'row', justifyContent: 'space-between'}}>
-              {step !== 0 ? (
+        
+          {step !== 0 && (
+            <>
+            
+              <View
+                style={{flexDirection: 'row', justifyContent: 'space-between'}}>
                 <LeftArrow onPress={() => handlePrevStep()} />
-              ) : (
-                <View />
-              )}
-              <RightArrow onPress={() => handleNextStep()} />
-            </View>
-          </>
-        )}
-      </View>
+                <CreateQuizButton onPress={() => handleSubmitQuiz()} />
+                <RightArrow onPress={() => handleNextStep()} />
+              </View>
+            </>
+          )}
+        </View>
       </ScrollView>
     </View>
   );

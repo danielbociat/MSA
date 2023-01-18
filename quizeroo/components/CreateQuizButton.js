@@ -9,23 +9,27 @@ import {
   TouchableOpacity,
   Image,
 } from 'react-native';
-import leftArrow1 from "../Images/leftArrow1.png";
+import addB from "../Images/addB.png"
 
-const LeftArrow = ({onPress}) =>
+
+
+const CreateQuizButton = ({onPress}) =>
 
   {
     return (
       <View>
         <TouchableOpacity style={styles.create} onPress={onPress}>
-        <Image source={leftArrow1}
-          style={styles.image}></Image> 
+        <Text source={addB}
+          style={styles.image}>
+            Submit    
+        </Text> 
         </TouchableOpacity>
       </View>
     );
   };
 
 const styles = StyleSheet.create({
-  create: {
+create: {
     alignItems: 'center',
     backgroundColor: '#E6D254',
     padding: 16,
@@ -36,12 +40,12 @@ const styles = StyleSheet.create({
     marginTop: 30,
     marginLeft:15,
     marginBottom:15,
-  },
+    },
   image:{
-    height: 50,
-    width:50,
+    height: 30,
+    width:30,
+    
+
   }
 });
-
-
-export default LeftArrow;
+export default CreateQuizButton;
