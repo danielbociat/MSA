@@ -6,6 +6,7 @@ import {
   Pressable,
   StyleSheet,
   Image,
+  ImageBackground
 } from 'react-native';
 import {apiUrl} from '../../storage/api';
 import {useNavigation} from '@react-navigation/native';
@@ -21,7 +22,15 @@ const TakeQuiz = ({
   },
 }) => {
   const [currentQuestion, setCurrentQuestion] = useState(0);
+  const [answered, setAnswered] = useState(false);
+  
+  const handleQuestionAnswer = (answer_id, question_id) => {
 
+    console.log(answer_id, question_id);
+    return ;
+  }
+  
+  console.log(questions);
   return (
     <ScrollView style={{flex: 1}} contentContainerStyle={{flexGrow: 1}}>
       <ImageBackground source={quizImage} style={styles.background}>
@@ -46,12 +55,12 @@ const styles = StyleSheet.create({
     color: 'black',
   },
   questions: {
-    backgroundColor: '#E6D254',
+    backgroundColor: '#e8cf34',
     height: '90%',
   },
   startbtn: {
     alignItems: 'center',
-    backgroundColor: 'yellow',
+    backgroundColor: '#e8cf34',
     padding: 12,
     width: '80%',
     alignSelf: 'center',
@@ -62,7 +71,7 @@ const styles = StyleSheet.create({
   },
   startbtn_disabled: {
     alignItems: 'center',
-    backgroundColor: 'yellow',
+    backgroundColor: '#e8cf34',
     padding: 12,
     width: '80%',
     alignSelf: 'center',
@@ -77,7 +86,6 @@ const styles = StyleSheet.create({
     fontWeight: 'normal',
     fontSize: 22,
     padding: 10,
-    // textDecorationLine: "underline",
   },
   image: {
     marginTop: 15,

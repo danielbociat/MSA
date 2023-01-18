@@ -13,42 +13,40 @@ import addB from "../Images/addB.png"
 
 
 
-const AddButton = ({onPress}) =>
+const CreateQuizButton = ({disabled, onPress}) =>
 
   {
     return (
       <View>
-        <TouchableOpacity style={styles.create} onPress={onPress}>
-        <Image source={addB}
-          style={styles.image}></Image> 
+        <TouchableOpacity disabled={disabled} style={[styles.create, disabled && styles.disabled]} onPress={onPress}>
+        <Text source={addB}
+          style={styles.image}>
+            Submit    
+        </Text> 
         </TouchableOpacity>
       </View>
     );
   };
 
 const styles = StyleSheet.create({
-  create: {
+create: {
     alignItems: 'center',
-<<<<<<< HEAD
-    backgroundColor: '#E6D254',
-    padding: 20,
-=======
     backgroundColor: '#e8cf34',
     padding: 16,
->>>>>>> ae99edf60f678afff8f2eb292856cd5f852cdceb
-    width: '80%',
-    alignSelf: 'center',
+    alignSelf: 'flex-start',
     borderColor: 'black',
     borderWidth: 3,
     borderRadius: 15,
-    marginTop: 20,
-    marginBottom: 40,
-  },
+    marginTop: 30,
+    marginLeft:15,
+    marginBottom:15,
+    },
   image:{
     height: 30,
     width:30,
-    
-
-  }
+  },
+  disabled:{
+    opacity: 0.5,
+  },
 });
-export default AddButton;
+export default CreateQuizButton;

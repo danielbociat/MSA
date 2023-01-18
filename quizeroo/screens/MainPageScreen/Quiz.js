@@ -78,7 +78,7 @@ const styles = StyleSheet.create({
     color: 'black',
   },
   questions: {
-    backgroundColor: '#E6D254',
+    backgroundColor: '#e8cf34',
     height: '90%',
   },
   startbtn: {

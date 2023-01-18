@@ -11,10 +11,10 @@ import {
 } from 'react-native';
 import rightArrow from '../Images/rightArrow.png';
 
-const RightArrow = ({onPress}) => {
+const RightArrow = ({disabled, onPress}) => {
   return (
     <View>
-      <TouchableOpacity style={styles.create} onPress={onPress}>
+      <TouchableOpacity disabled={disabled} style={[styles.create, disabled && styles.disabled]} onPress={onPress}>
         <Image source={rightArrow} style={styles.image}></Image>
       </TouchableOpacity>
     </View>
@@ -24,7 +24,7 @@ const RightArrow = ({onPress}) => {
 const styles = StyleSheet.create({
   create: {
     alignItems: 'center',
-    backgroundColor: '#E6D254',
+    backgroundColor: '#e8cf34',
     padding: 16,
     alignSelf: 'flex-end',
     borderColor: 'black',
@@ -33,6 +33,10 @@ const styles = StyleSheet.create({
     marginTop: 30,
     marginRight: 15,
     marginBottom: 15,
+    
+  },
+  disabled:{
+    opacity: 0.5,
   },
   image: {
     height: 50,

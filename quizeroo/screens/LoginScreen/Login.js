@@ -40,7 +40,7 @@ const Login = ({navigation}) => {
   };
 
   const onForgotPasswordPressed = () => {
-    console.log('onForgotPasswordPressed');
+    console.warn('¯\\_(ツ)_/¯');
   };
 
   const onSignUpPressed = () => {
@@ -62,7 +62,7 @@ const Login = ({navigation}) => {
         />
 
         <CustomInput
-          placeholder="Username..."
+          placeholder="Username"
           value={username}
           setValue={setUsername}
           placeholderTextColor={'white'}
@@ -85,7 +85,7 @@ const Login = ({navigation}) => {
         />
 
         <CustomButton
-          text="Don't have an account? Create one"
+          text="Don't have an account? Create one here"
           onPress={onSignUpPressed}
           type="TERTIARY"
         />
