@@ -29,13 +29,8 @@ const AddButton = ({onPress}) =>
 const styles = StyleSheet.create({
   create: {
     alignItems: 'center',
-<<<<<<< HEAD
     backgroundColor: '#E6D254',
     padding: 20,
-=======
-    backgroundColor: '#e8cf34',
-    padding: 16,
->>>>>>> ae99edf60f678afff8f2eb292856cd5f852cdceb
     width: '80%',
     alignSelf: 'center',
     borderColor: 'black',
