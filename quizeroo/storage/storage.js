@@ -4,7 +4,7 @@ export const storeData = async (name: string, value: string) => {
 	try {
 		AsyncStorage.setItem(name, value);
 	} catch (e) {
-		console.warn(e);
+		console.log(e);
 	}
 };
 

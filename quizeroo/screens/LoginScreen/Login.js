@@ -35,12 +35,12 @@ const Login = ({navigation}) => {
         navigation.navigate('MainPage');
       })
       .catch(error => {
-        console.warn(error);
+        console.log(error);
       })
   };
 
   const onForgotPasswordPressed = () => {
-    console.warn('onForgotPasswordPressed');
+    console.log('onForgotPasswordPressed');
   };
 
   const onSignUpPressed = () => {

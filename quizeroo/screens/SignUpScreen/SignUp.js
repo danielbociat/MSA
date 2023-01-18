@@ -76,11 +76,11 @@ const SignUp = ({navigation}) => {
   };
 
   const onTermsOfUse = () => {
-    console.warn('onTermsOfUse');
+    console.log('onTermsOfUse');
   };
 
   const onPrivacyPolicy = () => {
-    console.warn('onPrivacyPolicy');
+    console.log('onPrivacyPolicy');
   };
 
   return (

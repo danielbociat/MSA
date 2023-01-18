@@ -41,6 +41,7 @@ const CreateQuiz = ({navigation}) => {
 
   return (
     <View style={styles.view}>
+      <ScrollView>
       <View style={{flex: 1, justifyContent: 'flex-start'}}>
         <Pressable onPress={() => navigation.goBack()}>
           <Image source={back} style={styles.image}></Image>
@@ -78,6 +79,7 @@ const CreateQuiz = ({navigation}) => {
           </>
         )}
       </View>
+      </ScrollView>
     </View>
   );
 };

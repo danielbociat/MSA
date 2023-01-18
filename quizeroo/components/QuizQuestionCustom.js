@@ -13,7 +13,7 @@ import CustomInput from './CustomInput';
 import Question from './Question';
 
 const QuizQuestionCustom = ({quiz, setQuiz, step}) => {
-  const [question, setQuestion] = useState(quiz.questions[step].question);
+  const [questionText, setQuestionText] = useState(quiz.questions[step].questionText);
   const [answer, setAnswer] = useState(quiz.questions[step].answer);
   const [a, setA] = useState(quiz.questions[step].a);
   const [b, setB] = useState(quiz.questions[step].b);
@@ -21,21 +21,21 @@ const QuizQuestionCustom = ({quiz, setQuiz, step}) => {
 
   const questionObj = useMemo(
     () => ({
-      question,
+      questionText,
       answer,
       a,
       b,
       c,
     }),
-    [question, answer, a, b, c],
+    [questionText, answer, a, b, c],
   );
 
   const handleQuestionChange = () => {
-    const newQuizQuestionsArr = quiz.questions.map((question, idx) => {
+    const newQuizQuestionsArr = quiz.questions.map((questionText, idx) => {
       if (step === idx) {
         return questionObj;
       }
-      return question;
+      return questionText;
     });
 
     setQuiz(prev => ({...prev, questions: newQuizQuestionsArr}));
@@ -46,7 +46,7 @@ const QuizQuestionCustom = ({quiz, setQuiz, step}) => {
   }, [questionObj]);
 
   const handleReset = () => {
-    setQuestion(quiz.questions[step].question);
+    setQuestionText(quiz.questions[step].questionText);
     setAnswer(quiz.questions[step].answer);
     setA(quiz.questions[step].a);
     setB(quiz.questions[step].b);
@@ -58,23 +58,21 @@ const QuizQuestionCustom = ({quiz, setQuiz, step}) => {
   }, [step]);
 
   return (
-    <ScrollView>
       <View style={styles.contain}>
         <Question
           placeholder="Q:"
           placeholderTextColor={'black'}
-          value={question}
-          setValue={val => setQuestion(val)}></Question>
+          value={questionText}
+          setValue={val => setQuestionText(val)}></Question>
         <Answer
-          text={'Answer: '}
+          text={'Correct Answer: '}
           value={answer}
           setValue={val => setAnswer(val)}
         />
-        <Answer text={'A: '} value={a} setValue={val => setA(val)} />
-        <Answer text={'B: '} value={b} setValue={val => setB(val)} />
-        <Answer text={'C: '} value={c} setValue={val => setC(val)} />
+        <Answer text={'Wrong Answer #1: '} value={a} setValue={val => setA(val)} />
+        <Answer text={'Wrong Answer #2: '} value={b} setValue={val => setB(val)} />
+        <Answer text={'Wrong Answer #3: '} value={c} setValue={val => setC(val)} />
       </View>
-    </ScrollView>
   );
 };
 
