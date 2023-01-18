@@ -155,7 +155,7 @@ const CreateQuiz = ({navigation}) => {
           {step !== 0 && (
             <>
               <View
-                style={{flexDirection: 'row', justifyContent: 'space-between'}}>
+                style={{flexDirection: 'row', justifyContent: 'space-evenly'}}>
                 <LeftArrow onPress={() => handlePrevStep()} />
                 <CreateQuizButton
                   disabled={!isQuizCompleted()}
@@ -192,8 +192,9 @@ const styles = StyleSheet.create({
     paddingLeft: 90,
   },
   add: {
-    fontSize: 16,
+    fontSize: 26,
     padding: 30,
+    paddingTop: 30,
     fontWeight: 'bold',
     color: 'black',
   },
