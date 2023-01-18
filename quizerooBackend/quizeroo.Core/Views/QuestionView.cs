@@ -4,8 +4,14 @@
     {
         public int id { get; set; }
         public string? question { get; set; }
-        public List<string>? answers { get; set; }
-        public List<int>? answers_id { get; set; }
+        public List<AnswerView>? answers { get; set; }
+    }
+
+    public class AnswerView
+    {
+        public string text { get; set; }
+        public int id { get; set; }
+
     }
 
 

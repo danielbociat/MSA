@@ -16,6 +16,7 @@ namespace quizeroo.API.Controllers
     public class QuizController : ControllerBase
     {
         private readonly ApplicationDbContext _dbContext;
+
         public QuizController(ApplicationDbContext dbContext)
         {
             _dbContext = dbContext;
@@ -45,8 +46,11 @@ namespace quizeroo.API.Controllers
             var questions = await _dbContext.QuizQuestions.Where(q => q.Id == quiz.Id).Select(q => new QuestionView{ 
                 id = q.Id,
                 question = q.Question,
-                answers = q.Answers.Select(a => a.Text).ToList(),
-                answers_id = q.Answers.Select(a => a.Id).ToList(),
+                answers = (List<AnswerView>)q.Answers.Select(a =>new AnswerView
+                {
+                    text = a.Text,
+                    id = a.Id,
+                }).ToList().Shuffle(),
             }).ToListAsync();
 
             return Ok(new {title = quiz.QuizTitle, quiz_questions = questions});
@@ -82,6 +86,25 @@ namespace quizeroo.API.Controllers
             return BadRequest();
         }
 
+    }
 
+    static class MyExtensions
+    {
+        public static IList<T> Shuffle<T>(this IList<T> list)
+        {
+            int n = list.Count;
+            Random _random = new Random();
+            while (n > 1)
+            {
+                n--;
+                int k = _random.Next(n + 1);
+                T value = list[k];
+                list[k] = list[n];
+                list[n] = value;
+            }
+
+            return list;
+        }
     }
 }
+
