@@ -40,7 +40,7 @@ const Login = ({navigation}) => {
   };
 
   const onForgotPasswordPressed = () => {
-    console.log('onForgotPasswordPressed');
+    console.warn('¯\\_(ツ)_/¯');
   };
 
   const onSignUpPressed = () => {
