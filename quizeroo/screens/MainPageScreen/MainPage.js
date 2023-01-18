@@ -54,7 +54,7 @@ const MainPage = ({navigation}) => {
         <TouchableOpacity
           onPress={() => navigation.navigate('CreateQuiz')}
           style={styles.create}>
-            <Text style={styles.Text2}>Create a new quizz</Text>
+            <Text style={styles.Text2}>Create a new quiz</Text>
         </TouchableOpacity>
       </View>
     </>
@@ -100,7 +100,7 @@ const styles = StyleSheet.create({
   Text2: {
     fontSize: 30,
     fontWeight: 'bold',
-    color: '#e8cf34',
+    color: 'white',
   },
   createBttn: {
     backgroundColor: '#e8cf34',
