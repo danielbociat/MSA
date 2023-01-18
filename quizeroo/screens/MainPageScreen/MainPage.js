@@ -37,7 +37,7 @@ const MainPage = ({navigation}) => {
    
   return (
     <>
-      <ScrollView style={{flex: 1}} contentContainerStyle={{flexGrow: 1}}>
+      <ScrollView style={{flex: 1, backgroundColor:'white'}} contentContainerStyle={{flexGrow: 1}}>
         <View style={styles.view}>
           {quizes.map(({title, id}, key) => (
             <Pressable
@@ -80,11 +80,9 @@ const styles = StyleSheet.create({
     color: 'black',
   },
   view: {
-    marginTop: 40,
-    height:'90%',
+    marginTop: 70,
+    height:'100%',
     backgroundColor:'white',
-    //   backgroundColor: "black",
-    //   flex: 1,
   },
   create: {
     alignItems: 'center',
