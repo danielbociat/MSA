@@ -39,7 +39,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   container_PRIMARY: {
-    backgroundColor: '#E6D254',
+    backgroundColor: '#e8cf34',
   },
   container_TERTIARY: {
     marginVertical: 18,

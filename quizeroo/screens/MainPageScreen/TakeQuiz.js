@@ -41,12 +41,12 @@ const styles = StyleSheet.create({
     color: 'black',
   },
   questions: {
-    backgroundColor: '#E6D254',
+    backgroundColor: '#e8cf34',
     height: '90%',
   },
   startbtn: {
     alignItems: 'center',
-    backgroundColor: 'yellow',
+    backgroundColor: '#e8cf34',
     padding: 12,
     width: '80%',
     alignSelf: 'center',
@@ -57,7 +57,7 @@ const styles = StyleSheet.create({
   },
   startbtn_disabled: {
     alignItems: 'center',
-    backgroundColor: 'yellow',
+    backgroundColor: '#e8cf34',
     padding: 12,
     width: '80%',
     alignSelf: 'center',

@@ -178,7 +178,7 @@ const styles = StyleSheet.create({
     marginVertical: 10,
   },
   link: {
-    color: '#E6D254',
+    color: '#e8cf34',
     fontStyle: 'bold',
   },
   image: {

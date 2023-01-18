@@ -44,7 +44,7 @@ const CustomTitle = ({
       marginVertical: 3,
     },
     input: {
-        color: '#E6D254',
+        color: '#e8cf34',
         height: 60,
         fontWeight:'bold',
         fontSize: 30,

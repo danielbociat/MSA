@@ -67,7 +67,7 @@ const styles = StyleSheet.create({
     borderRadius: 15,
     marginVertical: 15,
     alignItems: 'center',
-    backgroundColor: '#E6D254',
+    backgroundColor: '#e8cf34',
     borderColor: 'black',
     borderWidth: 3,
     width: '80%',
@@ -100,10 +100,10 @@ const styles = StyleSheet.create({
   Text2: {
     fontSize: 30,
     fontWeight: 'bold',
-    color: '#E6D254',
+    color: '#e8cf34',
   },
   createBttn: {
-    backgroundColor: '#E6D254',
+    backgroundColor: '#e8cf34',
     height: '15%',
     alignContent: 'center',
   },

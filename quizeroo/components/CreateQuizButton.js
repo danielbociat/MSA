@@ -31,7 +31,7 @@ const CreateQuizButton = ({disabled, onPress}) =>
 const styles = StyleSheet.create({
 create: {
     alignItems: 'center',
-    backgroundColor: '#E6D254',
+    backgroundColor: '#e8cf34',
     padding: 16,
     alignSelf: 'flex-start',
     borderColor: 'black',

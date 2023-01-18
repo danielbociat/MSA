@@ -79,7 +79,7 @@ const QuizQuestionCustom = ({quiz, setQuiz, step}) => {
 
 const styles = StyleSheet.create({
   contain: {
-    backgroundColor: '#E6D254',
+    backgroundColor: '#e8cf34',
     width: '90%',
     borderRadius: 15,
     borderColor: 'black',
