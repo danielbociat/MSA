@@ -13,12 +13,12 @@ import addB from "../Images/addB.png"
 
 
 
-const CreateQuizButton = ({onPress}) =>
+const CreateQuizButton = ({disabled, onPress}) =>
 
   {
     return (
       <View>
-        <TouchableOpacity style={styles.create} onPress={onPress}>
+        <TouchableOpacity disabled={disabled} style={[styles.create, disabled && styles.disabled]} onPress={onPress}>
         <Text source={addB}
           style={styles.image}>
             Submit    
@@ -44,8 +44,9 @@ create: {
   image:{
     height: 30,
     width:30,
-    
-
-  }
+  },
+  disabled:{
+    opacity: 0.5,
+  },
 });
 export default CreateQuizButton;

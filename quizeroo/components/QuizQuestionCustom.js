@@ -12,6 +12,7 @@ import Answer from './Answer';
 import CustomInput from './CustomInput';
 import Question from './Question';
 
+
 const QuizQuestionCustom = ({quiz, setQuiz, step}) => {
   const [questionText, setQuestionText] = useState(quiz.questions[step].questionText);
   const [answer, setAnswer] = useState(quiz.questions[step].answer);
@@ -65,13 +66,13 @@ const QuizQuestionCustom = ({quiz, setQuiz, step}) => {
           value={questionText}
           setValue={val => setQuestionText(val)}></Question>
         <Answer
-          text={'Correct Answer: '}
+          placeholder={'Correct Answer: '}
           value={answer}
           setValue={val => setAnswer(val)}
         />
-        <Answer text={'Wrong Answer #1: '} value={a} setValue={val => setA(val)} />
-        <Answer text={'Wrong Answer #2: '} value={b} setValue={val => setB(val)} />
-        <Answer text={'Wrong Answer #3: '} value={c} setValue={val => setC(val)} />
+        <Answer placeholder={'Wrong Answer #1: '} value={a} setValue={val => setA(val)} />
+        <Answer placeholder={'Wrong Answer #2: '} value={b} setValue={val => setB(val)} />
+        <Answer placeholder={'Wrong Answer #3: '} value={c} setValue={val => setC(val)} />
       </View>
   );
 };
