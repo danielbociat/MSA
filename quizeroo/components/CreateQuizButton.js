@@ -9,7 +9,7 @@ import {
   TouchableOpacity,
   Image,
 } from 'react-native';
-import addB from "../Images/addB.png"
+
 
 
 
@@ -19,8 +19,8 @@ const CreateQuizButton = ({disabled, onPress}) =>
     return (
       <View>
         <TouchableOpacity disabled={disabled} style={[styles.create, disabled && styles.disabled]} onPress={onPress}>
-        <Text source={addB}
-          style={styles.image}>
+        <Text style={styles.text}>
+          
             Submit    
         </Text> 
         </TouchableOpacity>
@@ -32,21 +32,23 @@ const styles = StyleSheet.create({
 create: {
     alignItems: 'center',
     backgroundColor: '#e8cf34',
-    padding: 16,
-    alignSelf: 'flex-start',
+    padding: 26,
+    alignSelf:'center',
+    
+    
     borderColor: 'black',
     borderWidth: 3,
     borderRadius: 15,
     marginTop: 30,
-    marginLeft:15,
-    marginBottom:15,
+    marginBottom: 20,
     },
-  image:{
-    height: 30,
-    width:30,
-  },
+ 
   disabled:{
     opacity: 0.5,
   },
+  text:{
+    fontSize: 22,
+    fontWeight:'bold',
+  }
 });
 export default CreateQuizButton;
