@@ -75,7 +75,7 @@ const TakeQuiz = ({
       </Pressable>
 
       <View>
-        <Text style={styles.Title}>{questions[currentQuestion].question}</Text>
+        <Text numberOfLines={2}  allowFontScaling={true} adjustsFontSizeToFit={true} style={styles.Title}>{questions[currentQuestion].question}</Text>
         <ImageBackground source={quizImage} style={styles.background}>
           {questions[currentQuestion].answers.map((a, key) => (
             <Pressable
@@ -97,13 +97,13 @@ const TakeQuiz = ({
 };
 const styles = StyleSheet.create({
   Title: {
-    fontSize: 35,
+    fontSize: 50,
+    height:'20%',
     textAlign: 'center',
     padding: 25,
     fontWeight: 'bold',
     color: 'black',
     width: '100%',
-    paddingBottom:60,
   },
   questions: {
     backgroundColor: '#e8cf34',
