@@ -85,7 +85,7 @@ const TakeQuiz = ({
                 questions[currentQuestion].id,
               )}
               disabled = {answered}
-              style={[styles.answer, answered && (isCorrectAnswer(a.id) ? styles.answerCorrect : styles.answerWrong)]}>
+              style={[styles.answer, answered && (isCorrectAnswer(a.id) ? styles.answerCorrect : styles.answerWrong), answered && (a.id !== answerId) && styles.answerNotSelected]}>
               <Text style={styles.answerText}>{a.text}</Text>
             </Pressable>
           ))}
@@ -97,11 +97,12 @@ const TakeQuiz = ({
 };
 const styles = StyleSheet.create({
   Title: {
-    fontSize: 40,
-    alignSelf: 'center',
+    fontSize: 35,
+    textAlign: 'center',
     padding: 25,
     fontWeight: 'bold',
     color: 'black',
+    width: '100%',
     paddingBottom:60,
   },
   questions: {
@@ -170,8 +171,10 @@ const styles = StyleSheet.create({
   answerWrong: {
     borderColor: 'red',
     backgroundColor: '#edaaa6',
-    opacity: 0.5,
   },
+  answerNotSelected: {
+    opacity: 0.5,
+  }
 });
 
 export default TakeQuiz;

@@ -19,20 +19,27 @@ const Login = ({navigation}) => {
   const {height} = useWindowDimensions();
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const [errorMessage, setErrorMessage] = useState('');
 
   const onLoginPressed = async () => {
-      fetch(apiUrl + 'auth', {
+    setErrorMessage("");
+      await fetch(apiUrl + 'auth', {
         method: 'POST',
         headers: {'Content-Type': 'application/json'},
         body: JSON.stringify({username: username, password: password}),
       })
-      .then(response => {
-        if(response.ok) return response.json();
-        throw response;
-      })
+      .then(response => { return response.json();})
       .then(data => {
-        storeData('token', data.token);
-        navigation.navigate('MainPage');
+        if(data.token !== undefined){
+          storeData('token', data.token);
+          navigation.navigate('MainPage');
+        }
+        else{
+          if(data.error){
+            setErrorMessage(data.error);
+          }
+        }
+        
       })
       .catch(error => {
         console.log(error);
@@ -75,7 +82,7 @@ const Login = ({navigation}) => {
           secureTextEntry
           placeholderTextColor={'white'}
         />
-
+        {errorMessage !== '' && <Text style={styles.error}>{errorMessage}</Text>}
         <CustomButton text="Sign In" onPress={onLoginPressed} />
 
         <CustomButton
@@ -113,7 +120,10 @@ const styles = StyleSheet.create({
     position: 'absolute',
     height: '100%',
     width: '100%',
-},
+  },
+  error: {
+    color: 'red',
+  }
 });
 
 export default Login;

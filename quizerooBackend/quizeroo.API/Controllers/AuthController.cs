@@ -32,7 +32,7 @@ namespace quizeroo.API.Controllers
             var user = await _dbContext.Users.Where(u => u.Username == User.Username && u.Password == Convert.ToHexString(_sha256.ComputeHash(Encoding.UTF8.GetBytes(User.Password)))).FirstOrDefaultAsync();
 
             if (user == null)
-                return BadRequest("User does not exist or wrong password!");
+                return BadRequest(new { error = "User does not exist or wrong password!" });
 
             var key = Encoding.UTF8.GetBytes(_configuration["Jwt:Key"]);
 

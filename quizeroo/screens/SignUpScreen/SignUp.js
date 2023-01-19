@@ -17,9 +17,9 @@ const SignUp = ({navigation}) => {
   const [password, setPassword] = useState('');
   const [passwordRepeat, setPasswordRepeat] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
-  const [emailValidError, setEmailValidError] = useState('');
 
   const onRegisterPressed = async () => {
+    setErrorMessage('');
     if (username === '') {
       setErrorMessage('Username is mandatory!');
       return;
@@ -65,9 +65,7 @@ const SignUp = ({navigation}) => {
     let reg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w\w+)+$/;
 
     if (reg.test(val) === false) {
-      setEmailValidError('Please enter a valid e-mail address');
-    } else if (reg.test(val) === true) {
-      setEmailValidError('');
+      setErrorMessage('Please enter a valid e-mail address');
     }
   };
 
@@ -126,9 +124,8 @@ const SignUp = ({navigation}) => {
             secureTextEntry
           />
 
-          {errorMessage !== '' && <Text>{errorMessage}</Text>}
-          {emailValidError ? <Text>{emailValidError}</Text> : null}
-
+          {errorMessage !== '' && <Text style={styles.error}>{errorMessage}</Text>}
+          
           <CustomButton text="Register" onPress={onRegisterPressed} />
 
           <Text style={styles.text}>
@@ -184,5 +181,8 @@ const styles = StyleSheet.create({
   image: {
     alignContent: 'center',
   },
+  error: {
+    color: 'red',
+  }
 });
 export default SignUp;
