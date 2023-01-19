@@ -39,6 +39,7 @@ const MainPage = ({navigation}) => {
   });
 
   return (
+    <>
     <ScrollView style={{flex: 1}} contentContainerStyle={{flexGrow: 1}}>
       
         <ImageBackground
@@ -56,15 +57,17 @@ const MainPage = ({navigation}) => {
           ))}
         </View>
 
-        <View style={styles.createBttn}>
-          <TouchableOpacity
-            onPress={() => navigation.navigate('CreateQuiz')}
-            style={styles.create}>
-            <Text style={styles.Text2}>Create a new quiz</Text>
-          </TouchableOpacity>
-        </View>
+        
       </ImageBackground>
     </ScrollView>
+    <View style={styles.createBttn}>
+    <TouchableOpacity
+      onPress={() => navigation.navigate('CreateQuiz')}
+      style={styles.create}>
+      <Text style={styles.Text2}>Create a new quiz</Text>
+    </TouchableOpacity>
+  </View>
+  </>
   );
 };
 
@@ -78,7 +81,6 @@ const styles = StyleSheet.create({
     borderColor: 'black',
     borderWidth: 3,
     width: '80%',
-
     alignSelf: 'center',
   },
   Text: {
@@ -87,14 +89,10 @@ const styles = StyleSheet.create({
     color: 'black',
   },
   view: {
-    
     height: '100%',
     marginBottom: 0,
     flex: 1,
     paddingTop:50,
-
-    //   backgroundColor: "black",
-    //   flex: 1,
   },
   create: {
     alignItems: 'center',
