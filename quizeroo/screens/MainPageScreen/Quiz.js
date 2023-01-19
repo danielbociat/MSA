@@ -41,7 +41,6 @@ const Quiz = ({
         })
         .then(data => {
           setCurrentQuiz(data);
-          console.log(data);
           setQuestions(data.quiz_questions);
         })
         .catch(error => {});

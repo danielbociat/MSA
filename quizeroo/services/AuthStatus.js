@@ -20,6 +20,5 @@ export const Logout = () =>{
 }
 
 export const GetToken = () => {
-    console.log(getData("token"));
 	return getData("token");
 } 
