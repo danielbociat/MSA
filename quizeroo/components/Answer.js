@@ -18,7 +18,7 @@ const Answer = ({value, setValue, placeholder, placeholderTextColor, text}) => {
         value={value}
         onChangeText={setValue}
         placeholder={placeholder}
-        //placeholderTextColor={placeholderTextColor}
+        placeholderTextColor={placeholderTextColor}
         style={styles.input}
       />
     </View>
@@ -43,7 +43,7 @@ const styles = StyleSheet.create({
   input: {
     color: 'white',
     fontWeight: 'normal',
-    fontSize: 16,
+    fontSize: 18,
   },
   textA: {
     color: 'white',

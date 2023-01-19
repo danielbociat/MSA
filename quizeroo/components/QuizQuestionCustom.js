@@ -69,10 +69,11 @@ const QuizQuestionCustom = ({quiz, setQuiz, step}) => {
           placeholder={'Correct Answer: '}
           value={answer}
           setValue={val => setAnswer(val)}
+          placeholderTextColor={'white'}
         />
-        <Answer placeholder={'Wrong Answer #1: '} value={a} setValue={val => setA(val)} />
-        <Answer placeholder={'Wrong Answer #2: '} value={b} setValue={val => setB(val)} />
-        <Answer placeholder={'Wrong Answer #3: '} value={c} setValue={val => setC(val)} />
+        <Answer placeholder={'Wrong Answer #1: '} placeholderTextColor={'white'} value={a} setValue={val => setA(val)} />
+        <Answer placeholder={'Wrong Answer #2: '} placeholderTextColor={'white'} value={b} setValue={val => setB(val)} />
+        <Answer placeholder={'Wrong Answer #3: '} placeholderTextColor={'white'} value={c} setValue={val => setC(val)} />
       </View>
   );
 };

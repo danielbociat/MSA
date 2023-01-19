@@ -6,6 +6,7 @@ import {
   Pressable,
   StyleSheet,
   Image,
+  ImageBackground
 } from 'react-native';
 import {apiUrl} from '../../storage/api';
 import {useNavigation} from '@react-navigation/native';
@@ -54,7 +55,7 @@ const Quiz = ({
       <Pressable onPress={() => navigation.goBack()}>
         <Image source={back} style={styles.image}></Image>
       </Pressable>
-      <View>
+      <View style>
         <Text style={styles.Title}>{title}</Text>
         <Pressable
           disabled={questions ? false : true}

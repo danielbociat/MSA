@@ -37,7 +37,7 @@ const TakeQuiz = ({
         <Pressable onPress={() => navigation.goBack()}>
           <Image source={back} style={styles.image}></Image>
         </Pressable>
-        <View>
+        <View style={styles.view1}>
           <Text style={styles.Title}>
             {questions[currentQuestion].question}
           </Text>
@@ -97,6 +97,11 @@ const styles = StyleSheet.create({
     height: '100%',
     resizeMode: 'cover',
   },
+  view1:{
+    backgroundColor:'black',
+    width:"80%",
+    alignItems:"center",
+  }
 });
 
 export default TakeQuiz;
