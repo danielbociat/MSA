@@ -45,25 +45,24 @@ const MainPage = ({navigation}) => {
           source={quizImage}
           style={styles.background}
          >
-     
-      <View style={styles.view}>
-        {quizes.map(({title, id}, key) => (
-          <Pressable
-            key={key}
-            style={styles.category}
-            onPress={() => navigation.navigate('Quiz', {title: title, id: id})}>
-            <Text style={styles.Text}>{title}</Text>
-          </Pressable>
-        ))}
-      </View>
+        <View style={styles.view}>
+          {quizes.map(({title, id}, key) => (
+            <Pressable
+              key={key}
+              style={styles.category}
+              onPress={() => navigation.navigate('Quiz', {title: title, id: id})}>
+              <Text style={styles.Text}>{title}</Text>
+            </Pressable>
+          ))}
+        </View>
 
-      <View style={styles.createBttn}>
-        <TouchableOpacity
-          onPress={() => navigation.navigate('CreateQuiz')}
-          style={styles.create}>
-          <Text style={styles.Text2}>Create a new quizz</Text>
-        </TouchableOpacity>
-      </View>
+        <View style={styles.createBttn}>
+          <TouchableOpacity
+            onPress={() => navigation.navigate('CreateQuiz')}
+            style={styles.create}>
+            <Text style={styles.Text2}>Create a new quiz</Text>
+          </TouchableOpacity>
+        </View>
       </ImageBackground>
     </ScrollView>
   );

@@ -6,7 +6,7 @@ import {
   Pressable,
   StyleSheet,
   Image,
-  ImageBackground
+  ImageBackground,
 } from 'react-native';
 import {apiUrl} from '../../storage/api';
 import {useNavigation} from '@react-navigation/native';
@@ -14,6 +14,7 @@ import back from '../../Images/back.png';
 import {getData, storeData} from '../../storage/storage';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import quizImage from '../../Images/quizImage.png';
+import RightArrow from '../../components/RightArrow';
 
 const TakeQuiz = ({
   navigation,
@@ -23,36 +24,53 @@ const TakeQuiz = ({
 }) => {
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [answered, setAnswered] = useState(false);
-  
-  const handleQuestionAnswer = (answer_id, question_id) => {
 
+  const handleQuestionAnswer = (answer_id, question_id) => {
     console.log(answer_id, question_id);
-    return ;
-  }
-  
+    return;
+  };
+
+  const goNext = () => {
+    setCurrentQuestion(currentQuestion + 1);
+  };
+
   console.log(questions);
   return (
-    <ScrollView style={{flex: 1}} contentContainerStyle={{flexGrow: 1}}>
-      <ImageBackground source={quizImage} style={styles.background}>
-        <Pressable onPress={() => navigation.goBack()}>
-          <Image source={back} style={styles.image}></Image>
-        </Pressable>
-        <View style={styles.view1}>
-          <Text style={styles.Title}>
-            {questions[currentQuestion].question}
-          </Text>
-        </View>
-      </ImageBackground>
+    <ScrollView
+      style={{flex: 1, backgroundColor: 'white'}}
+      contentContainerStyle={{flexGrow: 1}}>
+      <Pressable onPress={() => navigation.goBack()}>
+        <Image source={back} style={styles.image}></Image>
+      </Pressable>
+
+      <View>
+        <Text style={styles.Title}>{questions[currentQuestion].question}</Text>
+        <ImageBackground source={quizImage} style={styles.background}>
+          {questions[currentQuestion].answers.map((a, key) => (
+            <Pressable
+              key={key}
+              onPress={handleQuestionAnswer(
+                a.id,
+                questions[currentQuestion].id,
+              )}
+              style={[styles.answer]}>
+              <Text style={styles.answerText}>{a.text}</Text>
+            </Pressable>
+          ))}
+          <RightArrow onPress={goNext} />
+        </ImageBackground>
+      </View>
     </ScrollView>
   );
 };
 const styles = StyleSheet.create({
   Title: {
-    fontSize: 50,
+    fontSize: 40,
     alignSelf: 'center',
     padding: 25,
     fontWeight: 'bold',
     color: 'black',
+    paddingBottom:60,
   },
   questions: {
     backgroundColor: '#e8cf34',
@@ -97,11 +115,32 @@ const styles = StyleSheet.create({
     height: '100%',
     resizeMode: 'cover',
   },
-  view1:{
-    backgroundColor:'black',
-    width:"80%",
-    alignItems:"center",
-  }
+  answer: {
+    padding: 10,
+    borderRadius: 15,
+    marginVertical: 15,
+    alignItems: 'center',
+    backgroundColor: 'white',
+    borderWidth: 3,
+    width: '90%',
+    alignSelf: 'center',
+  },
+  answerText: {
+    fontWeight:'bold',
+    fontSize: 25,
+    color:"black",
+
+  },
+  answerCorrect: {
+    borderColor: 'green',
+    backgroundColor: '#c0edaf',
+    borderWidth: 5,
+  },
+  answerWrong: {
+    borderColor: 'red',
+    backgroundColor: '#edaaa6',
+    opacity: 0.5,
+  },
 });
 
 export default TakeQuiz;

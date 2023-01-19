@@ -6,7 +6,7 @@ import {
   Pressable,
   StyleSheet,
   Image,
-  ImageBackground
+  ImageBackground,
 } from 'react-native';
 import {apiUrl} from '../../storage/api';
 import {useNavigation} from '@react-navigation/native';
@@ -23,49 +23,61 @@ const Quiz = ({
 }) => {
   const [currentQuiz, setCurrentQuiz] = useState();
   const [questions, setQuestions] = useState();
-
   const [token, setToken] = useState('');
+  const [loaded, setLoaded] = useState(false);
 
-  useEffect(() => {
-    AsyncStorage.getItem('token').then(tk => setToken(tk));
-    fetch(apiUrl + 'Quiz/' + id, {
-      method: 'GET',
-      headers: {
-        Authorization: 'Bearer ' + token,
-        'Content-Type': 'application/json',
-      },
-    })
-      .then(response => {
-        if (response.ok) return response.json();
-        throw response;
+  const fnct = () => {
+    if (!questions) {
+      AsyncStorage.getItem('token').then(tk => setToken(tk));
+      fetch(apiUrl + 'Quiz/' + id, {
+        method: 'GET',
+        headers: {
+          Authorization: 'Bearer ' + token,
+          'Content-Type': 'application/json',
+        },
       })
-      .then(data => {
-        setCurrentQuiz(data);
-        setQuestions(data.quiz_questions);
-      })
-      .catch(error => {});
-  });
+        .then(response => {
+          if (response.ok) return response.json();
+          throw response;
+        })
+        .then(data => {
+          setCurrentQuiz(data);
+          console.log(data);
+          setQuestions(data.quiz_questions);
+        })
+        .catch(error => {});
+    }
+  };
+
+  fnct();
 
   return (
     <ScrollView style={{flex: 1}} contentContainerStyle={{flexGrow: 1}}>
-       <ImageBackground
-          source={quizImage}
-          style={styles.background}
-         >
-      <Pressable onPress={() => navigation.goBack()}>
-        <Image source={back} style={styles.image}></Image>
-      </Pressable>
-      <View style>
-        <Text style={styles.Title}>{title}</Text>
-        <Pressable
-          disabled={questions ? false : true}
-          style={questions ? styles.startbtn : styles.startbtn_disabled}
-          onPress={() =>
-            navigation.navigate('TakeQuiz', {questions: questions})
-          }>
-          <Text style={styles.Text2}>START QUIZ</Text>
+      <ImageBackground source={quizImage} style={styles.background}>
+        <Pressable onPress={() => navigation.goBack()}>
+          <Image source={back} style={styles.image}></Image>
         </Pressable>
-      </View>
+        <View>
+          <Text style={styles.Title}>{title}</Text>
+          <Pressable
+            disabled={questions ? false : true}
+            style={questions ? styles.startbtn : styles.startbtn_disabled}
+            onPress={() =>
+              navigation.navigate('TakeQuiz', {questions: questions})
+            }>
+            {({pressed}) => (
+              <Text
+                style={[
+                  styles.Text2,
+                  {
+                    color: pressed ? 'white' : 'black',
+                  },
+                ]}>
+                START QUIZ
+              </Text>
+            )}
+          </Pressable>
+        </View>
       </ImageBackground>
     </ScrollView>
   );
@@ -82,17 +94,17 @@ const styles = StyleSheet.create({
     backgroundColor: '#e8cf34',
     height: '90%',
   },
-  startbtn: {
+  startbtn: ({pressed}) => ({
     alignItems: 'center',
-    backgroundColor: '#E6D254',
+    backgroundColor: pressed ? 'black' : '#E6D254',
     padding: 12,
     width: '80%',
     alignSelf: 'center',
     borderWidth: 3,
-    borderColor: 'black',
     borderRadius: 15,
     marginTop: 40,
-  },
+    borderColor: pressed ? 'white' : 'black',
+  }),
   startbtn_disabled: {
     alignItems: 'center',
     backgroundColor: '#E6D254',
@@ -103,7 +115,7 @@ const styles = StyleSheet.create({
     borderWidth: 3,
     borderRadius: 15,
     marginTop: 40,
-    opacity: 0.95,
+    opacity: 0.75,
   },
 
   Text2: {
@@ -111,7 +123,6 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     padding: 15,
     fontWeight: 'bold',
-    color: 'black',
   },
   image: {
     marginTop: 15,
@@ -123,8 +134,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
   },
   background: {
- 
-    height:'100%',
+    height: '100%',
     resizeMode: 'cover',
   },
 });
