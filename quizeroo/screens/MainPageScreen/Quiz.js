@@ -23,13 +23,12 @@ const Quiz = ({
 }) => {
   const [currentQuiz, setCurrentQuiz] = useState();
   const [questions, setQuestions] = useState();
-  const [token, setToken] = useState('');
   const [loaded, setLoaded] = useState(false);
 
-  const fnct = () => {
+  const fnct = async () => {
     if (!questions) {
-      AsyncStorage.getItem('token').then(tk => setToken(tk));
-      fetch(apiUrl + 'Quiz/' + id, {
+      const token = await AsyncStorage.getItem('token');
+      await fetch(apiUrl + 'Quiz/' + id, {
         method: 'GET',
         headers: {
           Authorization: 'Bearer ' + token,

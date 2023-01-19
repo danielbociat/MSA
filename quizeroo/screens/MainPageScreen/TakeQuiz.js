@@ -24,17 +24,48 @@ const TakeQuiz = ({
 }) => {
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [answered, setAnswered] = useState(false);
+  const [answerId, setAnsweredId] = useState(-1);
+  const [correctId, setCorrectId] = useState(-1);
+  const [isCorrect, setIsCorrect] = useState(false);
 
-  const handleQuestionAnswer = (answer_id, question_id) => {
-    console.log(answer_id, question_id);
-    return;
+  const handleQuestionAnswer = async (answer_id, question_id) => {
+    const token = await AsyncStorage.getItem('token');
+
+    await fetch(apiUrl + 'question/' + question_id + "/" + answer_id, {
+        method: 'POST',
+        headers: {
+          Authorization: 'Bearer ' + token,
+          'Content-Type': 'application/json',
+    }})
+    .then(response => {
+      if (response.ok){
+        return response.json()
+      };
+        throw response;
+    })
+    .then(data => {
+      setCorrectId(data.correctAnswer);
+    })
+    .catch(error => {});
+
+
+    setAnswered(true);
+    setAnsweredId(answer_id); 
   };
 
   const goNext = () => {
-    setCurrentQuestion(currentQuestion + 1);
+    setAnswered(false);
+
+    if(currentQuestion == questions.length-1)
+      navigation.navigate("MainPage");
+    else
+      setCurrentQuestion(currentQuestion + 1);
   };
 
-  console.log(questions);
+  const isCorrectAnswer = (id) => {
+    return id === correctId;
+  }
+
   return (
     <ScrollView
       style={{flex: 1, backgroundColor: 'white'}}
@@ -49,15 +80,16 @@ const TakeQuiz = ({
           {questions[currentQuestion].answers.map((a, key) => (
             <Pressable
               key={key}
-              onPress={handleQuestionAnswer(
+              onPress={() => handleQuestionAnswer(
                 a.id,
                 questions[currentQuestion].id,
               )}
-              style={[styles.answer]}>
+              disabled = {answered}
+              style={[styles.answer, answered && (isCorrectAnswer(a.id) ? styles.answerCorrect : styles.answerWrong)]}>
               <Text style={styles.answerText}>{a.text}</Text>
             </Pressable>
           ))}
-          <RightArrow onPress={goNext} />
+          <RightArrow disabled={!answered} onPress={goNext} />
         </ImageBackground>
       </View>
     </ScrollView>
@@ -129,7 +161,6 @@ const styles = StyleSheet.create({
     fontWeight:'bold',
     fontSize: 25,
     color:"black",
-
   },
   answerCorrect: {
     borderColor: 'green',

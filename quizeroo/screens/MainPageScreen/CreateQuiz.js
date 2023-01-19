@@ -62,7 +62,7 @@ const CreateQuiz = ({navigation}) => {
     console.log(quizBody);
 
     const token = await AsyncStorage.getItem('token');
-    fetch(apiUrl + 'quiz', {
+    await fetch(apiUrl + 'quiz', {
       method: 'POST',
       headers: {
         Authorization: 'Bearer ' + token,
