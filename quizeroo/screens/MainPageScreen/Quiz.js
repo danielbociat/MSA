@@ -56,7 +56,7 @@ const Quiz = ({
           <Image source={back} style={styles.image}></Image>
         </Pressable>
         <View>
-          <Text style={styles.Title}>{title}</Text>
+          <Text numberOfLines={2}  allowFontScaling={true} adjustsFontSizeToFit={true} style={styles.Title}>{title}</Text>
           <Pressable
             disabled={questions ? false : true}
             style={questions ? styles.startbtn : styles.startbtn_disabled}
