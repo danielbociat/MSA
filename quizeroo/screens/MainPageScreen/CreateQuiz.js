@@ -59,8 +59,6 @@ const CreateQuiz = ({navigation}) => {
     }));
     var quizBody = JSON.stringify({title: quiz.name, questions: questionsBody});
 
-    console.log(quizBody);
-
     const token = await AsyncStorage.getItem('token');
     await fetch(apiUrl + 'quiz', {
       method: 'POST',
@@ -114,8 +112,6 @@ const CreateQuiz = ({navigation}) => {
   };
 
   const handlePrevStep = () => {
-    console.log(quiz.questions[quiz.questions.length - 1]);
-    console.log(emptyQuestion(quiz.questions[quiz.questions.length - 1]));
     if (emptyQuestion(quiz.questions[quiz.questions.length - 1]))
       quiz.questions.pop();
 

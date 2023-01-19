@@ -17,9 +17,6 @@ const Question = ({value, setValue, placeholder, placeholderTextColor,text}) => 
         placeholderTextColor={placeholderTextColor}
         style={styles.input}
         multiline
-       // onChangeText={text => this.setState({ text })}
-        //value={this.state.text}
-        //style={{textAlign:'center',fontSize:30}}
       />
     </View>
   );
