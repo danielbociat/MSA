@@ -6,6 +6,7 @@ import {
   Pressable,
   StyleSheet,
   Image,
+  ImageBackground,
 } from 'react-native';
 import {apiUrl} from '../../storage/api';
 import {useNavigation} from '@react-navigation/native';
@@ -22,49 +23,53 @@ const Quiz = ({
 }) => {
   const [currentQuiz, setCurrentQuiz] = useState();
   const [questions, setQuestions] = useState();
-
   const [token, setToken] = useState('');
+  const [loaded, setLoaded] = useState(false);
 
-  useEffect(() => {
-    AsyncStorage.getItem('token').then(tk => setToken(tk));
-    fetch(apiUrl + 'Quiz/' + id, {
-      method: 'GET',
-      headers: {
-        Authorization: 'Bearer ' + token,
-        'Content-Type': 'application/json',
-      },
-    })
-      .then(response => {
-        if (response.ok) return response.json();
-        throw response;
+  const fnct = () => {
+    if(!questions){
+      AsyncStorage.getItem('token').then(tk => setToken(tk));
+      fetch(apiUrl + 'Quiz/' + id, {
+        method: 'GET',
+        headers: {
+          Authorization: 'Bearer ' + token,
+          'Content-Type': 'application/json',
+        },
       })
-      .then(data => {
-        setCurrentQuiz(data);
-        setQuestions(data.quiz_questions);
-      })
-      .catch(error => {});
-  });
+        .then(response => {
+          if (response.ok) return response.json();
+          throw response;
+        })
+        .then(data => {
+          setCurrentQuiz(data);
+          console.log(data); 
+          setQuestions(data.quiz_questions);
+        })
+        .catch(error => {});
+      }
+  };
+
+  fnct();
 
   return (
     <ScrollView style={{flex: 1}} contentContainerStyle={{flexGrow: 1}}>
        <ImageBackground
           source={quizImage}
-          style={styles.background}
-         >
-      <Pressable onPress={() => navigation.goBack()}>
-        <Image source={back} style={styles.image}></Image>
-      </Pressable>
-      <View>
-        <Text style={styles.Title}>{title}</Text>
-        <Pressable
-          disabled={questions ? false : true}
-          style={questions ? styles.startbtn : styles.startbtn_disabled}
-          onPress={() =>
-            navigation.navigate('TakeQuiz', {questions: questions})
-          }>
-          <Text style={styles.Text2}>START QUIZ</Text>
+          style={styles.background}>
+        <Pressable onPress={() => navigation.goBack()}>
+          <Image source={back} style={styles.image}></Image>
         </Pressable>
-      </View>
+        <View>
+          <Text style={styles.Title}>{title}</Text>
+          <Pressable
+            disabled={questions ? false : true}
+            style={questions ? styles.startbtn : styles.startbtn_disabled}
+            onPress={() =>
+              navigation.navigate('TakeQuiz', {questions: questions})
+            }>
+            <Text style={styles.Text2}>START QUIZ</Text>
+          </Pressable>
+        </View>
       </ImageBackground>
     </ScrollView>
   );

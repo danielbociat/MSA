@@ -43,10 +43,10 @@ namespace quizeroo.API.Controllers
         public async Task<IActionResult> GetById(int id)
         {
             var quiz = await _dbContext.Quizes.Where(q => q.Id == id).FirstAsync();
-            var questions = await _dbContext.QuizQuestions.Where(q => q.Id == quiz.Id).Select(q => new QuestionView{ 
+            var questions = await _dbContext.QuizQuestions.Where(q => q.QuizId == quiz.Id).Select(q => new QuestionView{ 
                 id = q.Id,
                 question = q.Question,
-                answers = (List<AnswerView>)q.Answers.Select(a =>new AnswerView
+                answers = (List<AnswerView>) q.Answers.Select(a =>new AnswerView
                 {
                     text = a.Text,
                     id = a.Id,

@@ -14,6 +14,7 @@ import back from '../../Images/back.png';
 import {getData, storeData} from '../../storage/storage';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import quizImage from '../../Images/quizImage.png';
+import RightArrow from '../../components/RightArrow';
 
 const TakeQuiz = ({
   navigation,
@@ -25,9 +26,12 @@ const TakeQuiz = ({
   const [answered, setAnswered] = useState(false);
   
   const handleQuestionAnswer = (answer_id, question_id) => {
-
     console.log(answer_id, question_id);
     return ;
+  }
+
+  const goNext = () => {
+    setCurrentQuestion(currentQuestion+1);
   }
   
   console.log(questions);
@@ -41,6 +45,12 @@ const TakeQuiz = ({
           <Text style={styles.Title}>
             {questions[currentQuestion].question}
           </Text>
+          { questions[currentQuestion].answers.map((a, key) => (
+            <Pressable key={key} onPress={handleQuestionAnswer(a.id, questions[currentQuestion].id) } style={[styles.answer]}>
+              <Text style={styles.answerText}>{a.text}</Text>
+            </Pressable>))
+          }
+          <RightArrow onPress={goNext}/>
         </View>
       </ImageBackground>
     </ScrollView>
@@ -48,7 +58,7 @@ const TakeQuiz = ({
 };
 const styles = StyleSheet.create({
   Title: {
-    fontSize: 50,
+    fontSize: 40,
     alignSelf: 'center',
     padding: 25,
     fontWeight: 'bold',
@@ -97,6 +107,30 @@ const styles = StyleSheet.create({
     height: '100%',
     resizeMode: 'cover',
   },
+  answer: {
+    padding: 10,
+    borderRadius: 15,
+    marginVertical: 15,
+    alignItems: 'center',
+    backgroundColor: 'white',
+    borderWidth: 3,
+    width: '90%',
+    alignSelf: 'center',
+  },
+  answerText: {
+    bold: true,
+    fontSize: 25,
+  },
+  answerCorrect: {
+    borderColor: 'green',
+    backgroundColor: '#c0edaf',
+    borderWidth: 5,
+  },
+  answerWrong: {
+    borderColor: 'red',
+    backgroundColor: '#edaaa6',
+    opacity: 0.5
+  }
 });
 
 export default TakeQuiz;
